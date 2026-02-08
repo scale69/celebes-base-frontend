@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "CELEBES SULTRA - Portal Berita Sulawesi Tenggara",
   description:
-    "Portal berita terkini dan terpercaya dari Sulawesi Tenggara dan Sultra. Berita Sultra, Ekonomi, Politik, Olahraga, Nasional, dan Hiburan.",
+    "Portal berita terkini dan terpercaya dari Sulawesi Tenggara. Berita Sultra, Ekonomi, Politik, Olahraga, Nasional, dan Hiburan.",
   keywords:
     "berita sultra, sulawesi tenggara, kendari, news, berita terkini, indonesia",
   authors: [{ name: "CELEBES SULTRA" }],
@@ -36,7 +36,7 @@ export const metadata = {
   openGraph: {
     title: "CELEBES SULTRA - Portal Berita Sulawesi Tenggara",
     description:
-      "Portal berita terkini dan terpercaya dari Sulawesi Tenggara dan Sultra",
+      "Portal berita terkini dan terpercaya dari Sulawesi Tenggara",
     type: "website",
     locale: "id_ID",
     siteName: "CELEBES SULTRA",
