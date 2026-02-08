@@ -120,7 +120,7 @@ const Header = () => {
                                 {/* <h1 className="text-2xl md:text-3xl font-bold text-sky-600 tracking-tight">
                                     CELEBES NUSANTARA
                                 </h1> */}
-                                <p className="text-[10px] bg-white pl-[74px] -mt-[26px] text-gray-500 tracking-wide">Portal Berita Sulawesi Tenggara</p>
+                                <p className="text-[10px] bg-white ml-[76px] -mt-[26px] text-gray-700 tracking-wide">Portal Berita Sulawesi Tenggara</p>
                             </div>
                         </Link>
 
