@@ -2,9 +2,9 @@ import { Skeleton } from "../ui/skeleton";
 
 export default function LoadingContent() {
     return (
-        <div className="flex justify-center w-full h-screen p-5">
+        <div className="flex justify-center w-full h-screen md:p-5">
             <div className="  h-full">
-                <div className="bg-white rounded-lg  overflow-hidden shadow-sm h-[600px] w-[900px] flex flex-col">
+                <div className="bg-white rounded-lg  overflow-hidden shadow-sm h-[600px] w-full sm:w-[400px] lg:w-[700px] flex flex-col">
                     <Skeleton className="h-50 w-full rounded-none" />
                     <div className="p-4 flex-1 flex flex-col  ">
                         <Skeleton className="h-4 w-20 mb-3 rounded-full" />

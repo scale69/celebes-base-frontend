@@ -3,7 +3,7 @@ import { Skeleton } from "../ui/skeleton";
 export default function LoadingCard() {
     return (
         <div className="flex justify-center w-full h-screen p-5">
-            <div className="grid grid-cols-2 gap-5 h-[600px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 h-[600px]">
                 {[1, 2, 3, 4].map((_, i) => (
                     <div key={i} className="bg-white rounded-lg  overflow-hidden shadow-sm  w-80 flex flex-col">
                         <Skeleton className="h-32 w-full rounded-none" />

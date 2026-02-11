@@ -5,6 +5,8 @@ import Header from "@/components/layout/Header";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/layout/Footer";
 import ReactQueryProvider from "@/lib/ReactQueryProvider";
+import LeftSidebar from "@/components/layout/LeftSidebar";
+import RightSidebar from "@/components/layout/RightSidebar";
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -81,7 +83,31 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Header />
-            {children}
+            <div className="min-h-screen flex flex-col bg-gray-50">
+              <main
+                id="main-content"
+                className="flex-1"
+                role="main"
+                aria-label="Main content"
+              >
+                <div className="container mx-auto px-4 py-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* Left Ad */}
+                    <LeftSidebar />
+                    {/* Main Content */}
+                    <div className="lg:col-span-7">
+                      {children}
+                    </div>
+
+                    {/* Right Sidebar */}
+
+                    <RightSidebar />
+
+
+                  </div>
+                </div>
+              </main>
+            </div>
             <Footer />
           </ThemeProvider>
         </ReactQueryProvider>

@@ -1,5 +1,7 @@
 import { cn } from '@/lib/utils'
+import { Ads } from '@/types/data'
 import { AdBannerProps } from '@/types/props'
+import Image from 'next/image'
 
 
 
@@ -11,15 +13,20 @@ const AdBanner = ({ size = 'horizontal', title = 'Iklan', className }: AdBannerP
         header: 'w-72 h-24',
     }
 
+
+
     return (
-        <div className={cn(
-            'bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden',
-            sizeClasses[size],
-            className
-        )}>
-            <div className="text-center">
-                <p className="text-gray-500 font-semibold text-sm">{title}</p>
-                <p className="text-gray-400 text-xs mt-1">Advertisement Space</p>
+        <div>
+            <div className={cn(
+                'bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden',
+                sizeClasses[size],
+                className
+            )}>
+                <div className="text-center">
+                    <p className="text-gray-500 font-semibold text-sm">{title}</p>
+                    <p className="text-gray-400 text-xs mt-1">Advertisement Space</p>
+                </div>
+
             </div>
         </div>
     )

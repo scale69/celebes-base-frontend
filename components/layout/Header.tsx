@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Menu, Search, ChevronDown } from 'lucide-react'
 import AdBanner from './AdBanner'
 import Image from 'next/image'
+import BannerAds from '../ads/BannerAds'
+import HeaderAds from '../ads/HeaderAds'
 
 
 const Header = () => {
@@ -117,16 +119,14 @@ const Header = () => {
                         <Link href="/" className="flex-shrink-0">
                             <div className="flex flex-col">
                                 <Image src={'/logo.png'} alt='logo-cs' width={200} height={100} unoptimized />
-                                {/* <h1 className="text-2xl md:text-3xl font-bold text-sky-600 tracking-tight">
-                                    CELEBES NUSANTARA
-                                </h1> */}
+
                                 <p className="text-[10px] bg-white ml-[76px] -mt-[26px] text-gray-700 tracking-wide">Portal Berita Sulawesi Tenggara</p>
                             </div>
                         </Link>
 
                         {/* Header Ad - Desktop Only */}
                         <div className="hidden lg:block">
-                            <AdBanner size="header" title="Iklan" />
+                            <HeaderAds />
                         </div>
 
                         {/* Mobile Menu Button */}
@@ -224,6 +224,10 @@ const Header = () => {
                         {/* Nasional */}
                         <Link href="/nasional" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
                             Nasional
+                        </Link>
+                        {/* Internasional */}
+                        <Link href="/internasional" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
+                            Internasional
                         </Link>
 
                         {/* Hiburan & Life Style */}

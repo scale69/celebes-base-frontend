@@ -2,10 +2,37 @@ import Link from 'next/link'
 import NewsCard from './NewsCard'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { ResultArtilce } from '@/types/data'
+import { ArticlesResponse, ResultArtilce } from '@/types/data'
+import { useQuery } from '@tanstack/react-query'
+import LoadingCard from '../layout/LoadingCard'
+import NoData from '../layout/NoData'
+import { fetchArticleByCategoryName } from '@/lib/axios/action/article'
 
-const CategorySection = ({ title, news, color = 'sky' }: { title: string, news: ResultArtilce[], color?: string }) => {
-    if (!news || news?.length === 0) return null
+const CategorySection = ({ title, color = 'sky' }: { title: string, color?: string }) => {
+    const { data, isLoading, isError } = useQuery<ArticlesResponse>({
+        queryKey: ['articles', title],
+        queryFn: () => fetchArticleByCategoryName(title),
+    });
+
+    if (isLoading) return <LoadingCard />
+    if (isError)
+        return (
+            <NoData
+                title="Artikel Tidak Ditemukan"
+                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
+                backUrl="/"
+                backLabel="Kembali ke Beranda"
+            />
+        );
+    if (!data)
+        return (
+            <NoData
+                title="Artikel Tidak Ditemukan"
+                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
+                backUrl="/"
+                backLabel="Kembali ke Beranda"
+            />
+        );
 
     const colorClasses = {
         sky: 'border-sky-500 text-sky-600 hover:text-sky-700',
@@ -37,8 +64,8 @@ const CategorySection = ({ title, news, color = 'sky' }: { title: string, news: 
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {news.slice(0, 4).map((item) => (
-                    <NewsCard key={item.id} news={item} />
+                {data.results.map((news: ResultArtilce) => (
+                    <NewsCard key={news.id} news={news} />
                 ))}
             </div>
         </section>

@@ -8,7 +8,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Ads } from "@/types/data";
 
-export default function LeftAds() {
+export default function InlineAds() {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
@@ -21,7 +21,7 @@ export default function LeftAds() {
     })();
 
 
-    const placement = "left sidebar"
+    const placement = "inline"
 
 
 
@@ -41,7 +41,7 @@ export default function LeftAds() {
             />
         );
 
-    if (data.length <= 0) return <AdBanner size="sidebar" title="Iklan" className="mb-4" />
+    if (data.length <= 0) return <AdBanner size="horizontal" title="Iklan" className="mb-4" />
     return (
         <div
             className="flex  flex-col gap-4 mb-8"
@@ -49,7 +49,7 @@ export default function LeftAds() {
             aria-label="Advertisement"
 
         >
-            {data.map((ads: Ads) => (
+            {data.slice(0, 1).map((ads: Ads) => (
                 <div key={ads.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
 
                 >
