@@ -66,7 +66,7 @@ export default function RightAds({ location }: { location: string }) {
                     </div>
                 ))
             ) : (
-                data.map((ads: Ads) => (
+                data.slice(1).map((ads: Ads) => (
                     <div key={ads.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
 
                     >
