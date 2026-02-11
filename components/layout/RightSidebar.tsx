@@ -7,6 +7,7 @@ import LoadingCard from "./LoadingCard";
 import NoData from "./NoData";
 import { fetchArticleByTopOrPopulare } from "@/lib/axios/action/article";
 import RightAds from "../ads/RightAds";
+import { Suspense } from "react";
 
 export default function RightSidebar() {
 
@@ -44,7 +45,9 @@ export default function RightSidebar() {
             <div className="sticky top-20 space-y-6">
                 {/* Ad */}
                 <div aria-label="Advertisement">
-                    <RightAds location="top" />
+                    <Suspense fallback={null}>
+                        <RightAds location="top" />
+                    </Suspense>
                 </div>
 
                 {/* Popular News */}
@@ -92,7 +95,9 @@ export default function RightSidebar() {
                 {/* Another Ad */}
                 <div aria-label="Advertisement">
                     {/* <AdBanner size="square" title="Sponsor" /> */}
-                    <RightAds location="bottom" />
+                    <Suspense fallback={null}>
+                        <RightAds location="bottom" />
+                    </Suspense>
                 </div>
             </div>
         </aside>

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import LeftAds from "../ads/LeftAds";
 
 export default function LeftSidebar() {
@@ -8,7 +9,9 @@ export default function LeftSidebar() {
             role="complementary"
         >
             <div className="sticky top-20">
-                <LeftAds />
+                <Suspense fallback={null}>
+                    <LeftAds />
+                </Suspense>
             </div>
 
         </aside>

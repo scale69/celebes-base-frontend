@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import AdBanner from "../layout/AdBanner";
 import { useQuery } from "@tanstack/react-query";
 import { fetchArticleByCategorySlug } from "@/lib/axios/action/article";
 import LoadingCard from "../layout/LoadingCard";

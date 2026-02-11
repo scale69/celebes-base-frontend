@@ -1,19 +1,16 @@
 "use client";
 
 
-import AdBanner from "../layout/AdBanner";
 import NewsCard from "./NewsCard";
 import { fetchArticles } from "@/lib/axios/action/article";
 import { useQuery } from "@tanstack/react-query";
 import { ResultArtilce } from "@/types/data";
-import LeftAds from "../ads/LeftAds";
-import BannerAds from "../ads/BannerAds";
 import CategorySection from "./CategorySection";
 import LoadingCard from "../layout/LoadingCard";
 import TopNews from "../home/TopNews";
 import NoData from "../layout/NoData";
-import RightSidebar from "../layout/RightSidebar";
 import InlineAds from "../ads/InlineAds";
+import { Suspense } from "react";
 
 
 const Home = () => {
@@ -53,7 +50,9 @@ const Home = () => {
             <TopNews />
 
             {/* Ad inline Banner */}
-            <InlineAds />
+            <Suspense fallback={null}>
+                <InlineAds />
+            </Suspense>
             {/* Latest News Grid */}
             <section aria-labelledby="latest-news-heading" className="mb-8">
                 <h2

@@ -1,11 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { Menu, Search, ChevronDown } from 'lucide-react'
 import AdBanner from './AdBanner'
 import Image from 'next/image'
-import BannerAds from '../ads/BannerAds'
 import HeaderAds from '../ads/HeaderAds'
 
 
@@ -126,7 +125,9 @@ const Header = () => {
 
                         {/* Header Ad - Desktop Only */}
                         <div className="hidden lg:block">
-                            <HeaderAds />
+                            <Suspense fallback={null}>
+                                <HeaderAds />
+                            </Suspense>
                         </div>
 
                         {/* Mobile Menu Button */}
