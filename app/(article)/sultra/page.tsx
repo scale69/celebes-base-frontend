@@ -1,6 +1,6 @@
 "use server"
 import NewsHeader from "@/components/articles/NewsHeader";
-export default function Page() {
+export default async function Page() {
     return (
         <NewsHeader />
     )
