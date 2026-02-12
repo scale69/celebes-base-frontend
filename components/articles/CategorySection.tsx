@@ -8,10 +8,11 @@ import LoadingCard from '../layout/LoadingCard'
 import NoData from '../layout/NoData'
 import { fetchArticleByCategoryName } from '@/lib/axios/action/article'
 
-const CategorySection = ({ title, color = 'sky' }: { title: string, color?: string }) => {
+const CategorySection = ({ title, initialData }: { title: string, initialData: ArticlesResponse }) => {
     const { data, isLoading, isError } = useQuery<ArticlesResponse>({
         queryKey: ['articles', title],
         queryFn: () => fetchArticleByCategoryName(title),
+        initialData
     });
 
     if (isLoading) return <LoadingCard />
@@ -46,7 +47,7 @@ const CategorySection = ({ title, color = 'sky' }: { title: string, color?: stri
             <div className="flex items-center justify-between mb-4">
                 <h2 className={cn(
                     'text-2xl font-bold text-gray-900 border-l-4 pl-3',
-                    colorClasses[color as keyof typeof colorClasses]
+                    // colorClasses[color as keyof typeof colorClasses]
                 )}>
                     {title}
                 </h2>
@@ -54,7 +55,7 @@ const CategorySection = ({ title, color = 'sky' }: { title: string, color?: stri
                     href={`/${title.toLowerCase()}`}
                     className={cn(
                         'flex items-center gap-1 text-sm font-semibold transition',
-                        colorClasses[color as keyof typeof colorClasses]
+                        // colorClasses[color as keyof typeof colorClasses]
 
                     )}
                 >

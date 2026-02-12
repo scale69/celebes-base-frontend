@@ -4,7 +4,7 @@
 import NewsCard from "./NewsCard";
 import { fetchArticles } from "@/lib/axios/action/article";
 import { useQuery } from "@tanstack/react-query";
-import { ResultArtilce } from "@/types/data";
+import { ArticlesResponse, ResultArtilce } from "@/types/data";
 import CategorySection from "./CategorySection";
 import LoadingCard from "../layout/LoadingCard";
 import TopNews from "../home/TopNews";
@@ -13,11 +13,17 @@ import InlineAds from "../ads/InlineAds";
 import { Suspense } from "react";
 import HeaderAds from "../ads/HeaderAds";
 
+interface HomeProps {
+    getData: ArticlesResponse
+    initialData: any[];      // array data tiap kategori
+    categories: string[];
+}
 
-const Home = () => {
+const Home = ({ getData, initialData, categories }: HomeProps) => {
     const { data, isLoading, isError } = useQuery({
         queryKey: ['articles'],
         queryFn: fetchArticles,
+        initialData: getData
     });
 
     if (isLoading) return <LoadingCard />
@@ -66,14 +72,14 @@ const Home = () => {
                     Berita Terkini
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {data?.results?.map((news: ResultArtilce) => (
+                    {data?.results.map((news: ResultArtilce) => (
                         <NewsCard key={news.id} news={news} featured={false} />
                     ))}
                 </div>
             </section>
 
             {/* Category Sections */}
-            <CategorySection
+            {/* <CategorySection
                 title="SULTRA"
 
                 color="sky"
@@ -85,7 +91,15 @@ const Home = () => {
             <CategorySection
                 title="Olahraga"
                 color="orange"
-            />
+            /> */}
+
+            {categories.map((category, i) => (
+                <CategorySection
+                    key={category}
+                    title={category}
+                    initialData={initialData[i]}
+                />
+            ))}
         </div>
 
 
