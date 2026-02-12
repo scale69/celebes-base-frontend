@@ -13,13 +13,14 @@ import NoData from '@/components/layout/NoData'
 import { fetchArticleBySlug } from '@/lib/axios/action/article'
 import RelatedNews from './RelatedNews'
 
-const ArtikelDetailPage = () => {
-    const params = useParams()
-    const slug = params.slug as string
+const ArtikelDetailPage = ({ slug, getData }: { slug: string, getData: ResultArtilce }) => {
+
+
 
     const { data: article, isLoading } = useQuery<ResultArtilce>({
         queryKey: ['articles', slug],
         queryFn: () => fetchArticleBySlug(slug),
+        initialData: getData
     });
 
     if (isLoading) return <LoadingContent />
