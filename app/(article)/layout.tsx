@@ -1,9 +1,14 @@
+import ReactQueryProvider from "@/lib/ReactQueryProvider"
 
 export default function ArticleLayout({
     children
 }: Readonly<{
     children: React.ReactNode
 }>) {
-    return children
+    return (
+        <ReactQueryProvider>
+            {children}
+        </ReactQueryProvider>
+    )
 
 }
