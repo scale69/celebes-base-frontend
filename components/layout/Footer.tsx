@@ -133,7 +133,7 @@ const Footer = () => {
 
                 {/* Bottom Bar */}
                 <div className="border-t border-gray-800 mt-8 pt-8 text-center text-xs md:text-sm text-gray-500">
-                    <p>&copy; {year} CELEBES NUSANTARA. All rights reserved.</p>
+                    <p>&copy; {year === year ? year : `2026 - ${year}`} CELEBES SULTRA. All rights reserved.</p>
                     <Link href={"https://scale.web.id"} target="_blank" >Designed by Scale</Link>
                 </div>
             </div>
