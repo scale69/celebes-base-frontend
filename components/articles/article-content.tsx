@@ -16,7 +16,6 @@ import RelatedNews from './RelatedNews'
 const ArtikelDetailPage = ({ slug, getData }: { slug: string, getData: ResultArtilce }) => {
 
 
-
     const { data: article, isLoading } = useQuery<ResultArtilce>({
         queryKey: ['articles', slug],
         queryFn: () => fetchArticleBySlug(slug),
