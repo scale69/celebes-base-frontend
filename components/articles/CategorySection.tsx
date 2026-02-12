@@ -12,7 +12,7 @@ const CategorySection = ({ title, initialData }: { title: string, initialData: A
     const { data, isLoading, isError } = useQuery<ArticlesResponse>({
         queryKey: ['articles', title],
         queryFn: () => fetchArticleByCategoryName(title),
-        initialData
+        placeholderData: initialData
     });
 
     if (isLoading) return <LoadingCard />

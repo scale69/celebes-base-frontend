@@ -23,7 +23,7 @@ const Home = ({ getData, initialData, categories }: HomeProps) => {
     const { data, isLoading, isError } = useQuery({
         queryKey: ['articles'],
         queryFn: fetchArticles,
-        initialData: getData
+        placeholderData: getData
     });
 
     if (isLoading) return <LoadingCard />

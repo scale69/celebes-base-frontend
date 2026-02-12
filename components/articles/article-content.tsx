@@ -19,7 +19,7 @@ const ArtikelDetailPage = ({ slug, getData }: { slug: string, getData: ResultArt
     const { data: article, isLoading } = useQuery<ResultArtilce>({
         queryKey: ['articles', slug],
         queryFn: () => fetchArticleBySlug(slug),
-        initialData: getData
+        placeholderData: getData
     });
 
     if (isLoading) return <LoadingContent />
