@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
-import { Menu, Search, ChevronDown } from 'lucide-react'
+import { Menu, Search, ChevronDown, Home } from 'lucide-react'
 import AdBanner from './AdBanner'
 import Image from 'next/image'
 import HeaderAds from '../ads/HeaderAds'
@@ -153,7 +153,7 @@ const Header = () => {
                     <div className="flex items-center justify-start">
                         {/* Home */}
                         <Link href="/" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
-                            Home
+                            <Home />
                         </Link>
 
                         {/* SULTRA Dropdown */}
@@ -275,9 +275,9 @@ const Header = () => {
             {/* Mobile Navigation */}
             <nav className="lg:hidden bg-gray-900 text-white">
                 <div className="container mx-auto px-4">
-                    <div className="flex space-x-4 py-3 overflow-x-auto">
+                    <div className="flex items-center space-x-4 py-3 overflow-x-auto">
                         <Link href="/" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
-                            Home
+                            <Home />
                         </Link>
                         <Link href="/sultra" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
                             Sultra
@@ -288,8 +288,8 @@ const Header = () => {
                         <Link href="/nasional" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
                             Nasional
                         </Link>
-                        <Link href="/internasional" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
-                            Internasional
+                        <Link href="/olahraga" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
+                            Olahraga
                         </Link>
                     </div>
                 </div>
