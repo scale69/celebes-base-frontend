@@ -2,8 +2,6 @@
 import { useQuery } from "@tanstack/react-query";
 import AdBanner from "../layout/AdBanner";
 import { fetchAds } from "@/lib/axios/action/ads";
-import LoadingCard from "../layout/LoadingCard";
-import NoData from "../layout/NoData";
 import { usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Ads } from "@/types/data";
@@ -30,18 +28,9 @@ export default function HeaderAds() {
         queryFn: () => fetchAds(placement, fullURL),
     });
 
-    if (isLoading) return <LoadingCard />;
-    if (isError)
-        return (
-            <NoData
-                title="Artikel Tidak Ditemukan"
-                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
-                backUrl="/"
-                backLabel="Kembali ke Beranda"
-            />
-        );
+    if (isLoading) return <AdBanner size="header" title="Iklan" />
+    if (isError) return <AdBanner size="header" title="Iklan" />
 
-    if (data.length <= 0) return <AdBanner size="header" title="Iklan" className="mb-4" />
     return (
         <div
             className="flex  flex-col gap-4 "
@@ -50,8 +39,9 @@ export default function HeaderAds() {
 
         >
             {data.slice(0, 1).map((ads: Ads) => (
-                <div key={ads.id} className='bg-gradient-to-br w-72 h-24  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
-
+                <div
+                    key={ads.id}
+                    className={`bg-gradient-to-br w-full h-32 from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden }`}
                 >
                     <Image
                         src={`${ads.image}`}
@@ -63,6 +53,11 @@ export default function HeaderAds() {
                     />
                 </div>
             ))}
+            {(data.length <= 0) && (
+                <div className={`${data.length === 0 ? "hidden lg:block" : "block"}`}>
+                    <AdBanner size="header" title="Iklan" className="mb-3 lg:mb-0" />
+                </div>
+            )}
         </div>
     )
 }

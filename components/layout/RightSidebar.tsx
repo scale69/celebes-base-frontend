@@ -8,6 +8,7 @@ import NoData from "./NoData";
 import { fetchArticleByTopOrPopulare } from "@/lib/axios/action/article";
 import RightAds from "../ads/RightAds";
 import { Suspense } from "react";
+import { FileX } from "lucide-react";
 
 export default function RightSidebar() {
 
@@ -16,25 +17,9 @@ export default function RightSidebar() {
         queryFn: () => fetchArticleByTopOrPopulare("popular_article"),
     });
 
-    if (isLoading) return <LoadingCard />
-    if (isError)
-        return (
-            <NoData
-                title="Artikel Tidak Ditemukan"
-                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
-                backUrl="/"
-                backLabel="Kembali ke Beranda"
-            />
-        );
-    if (!data)
-        return (
-            <NoData
-                title="Artikel Tidak Ditemukan"
-                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
-                backUrl="/"
-                backLabel="Kembali ke Beranda"
-            />
-        );
+    if (isLoading) return null
+    if (isError) return null
+    if (!data) return null
 
     return (
         <aside
@@ -42,7 +27,7 @@ export default function RightSidebar() {
             aria-label="Right sidebar"
             role="complementary"
         >
-            <div className="sticky top-20 space-y-6">
+            <div className="sticky space-y-6">
                 {/* Ad */}
                 <div aria-label="Advertisement">
                     <Suspense fallback={null}>
@@ -90,6 +75,14 @@ export default function RightSidebar() {
                             </li>
                         ))}
                     </ol>
+                    {(data.length <= 0) && (
+                        <div className="col-span-full gap-2 flex flex-col items-center justify-center py-8 border rounded-lg bg-gray-50 text-gray-500">
+                            <FileX />
+                            <span className="text-sm font-medium">
+                                Tidak ada berita populer untuk saat ini.
+                            </span>
+                        </div>
+                    )}
                 </nav>
 
                 {/* Another Ad */}

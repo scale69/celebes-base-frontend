@@ -10,7 +10,7 @@ const AdBanner = ({ size = 'horizontal', title = 'Iklan', className }: AdBannerP
         horizontal: 'w-full h-24 md:h-28',
         sidebar: 'w-full h-64',
         square: 'w-full aspect-square',
-        header: 'w-72 h-24',
+        header: 'w-72 h-32 ',
     }
 
 

@@ -71,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="en" suppressHydrationWarning >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
@@ -83,14 +83,11 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Header />
-            <div className="min-h-screen flex flex-col bg-gray-50">
+            <div className=" flex flex-col bg-gray-50 h-full">
               <main
-                id="main-content"
                 className="flex-1"
-                role="main"
-                aria-label="Main content"
               >
-                <div className="container mx-auto px-4 py-6">
+                <div className=" mx-auto px-4 py-6">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* Left Ad */}
                     <LeftSidebar />
@@ -98,12 +95,8 @@ export default function RootLayout({
                     <div className="lg:col-span-7">
                       {children}
                     </div>
-
                     {/* Right Sidebar */}
-
                     <RightSidebar />
-
-
                   </div>
                 </div>
               </main>

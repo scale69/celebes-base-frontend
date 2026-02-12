@@ -31,16 +31,8 @@ export default function RightAds({ location }: { location: string }) {
         queryFn: () => fetchAds(placement, fullURL),
     });
 
-    if (isLoading) return <LoadingCard />;
-    if (isError)
-        return (
-            <NoData
-                title="Artikel Tidak Ditemukan"
-                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
-                backUrl="/"
-                backLabel="Kembali ke Beranda"
-            />
-        );
+    if (isLoading) return <AdBanner size="sidebar" title="Iklan" className="mb-4" />
+    if (isError) return <AdBanner size="sidebar" title="Iklan" className="mb-4" />
 
     if (data.length <= 0) return <AdBanner size="sidebar" title="Iklan" className="mb-4" />
     return (

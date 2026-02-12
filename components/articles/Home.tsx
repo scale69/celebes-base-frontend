@@ -11,11 +11,10 @@ import TopNews from "../home/TopNews";
 import NoData from "../layout/NoData";
 import InlineAds from "../ads/InlineAds";
 import { Suspense } from "react";
+import HeaderAds from "../ads/HeaderAds";
 
 
 const Home = () => {
-
-
     const { data, isLoading, isError } = useQuery({
         queryKey: ['articles'],
         queryFn: fetchArticles,
@@ -53,6 +52,11 @@ const Home = () => {
             <Suspense fallback={null}>
                 <InlineAds />
             </Suspense>
+            <div className="block lg:hidden">
+                <Suspense fallback={null}>
+                    <HeaderAds />
+                </Suspense>
+            </div>
             {/* Latest News Grid */}
             <section aria-labelledby="latest-news-heading" className="mb-8">
                 <h2

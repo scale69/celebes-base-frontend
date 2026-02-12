@@ -4,6 +4,7 @@ import LoadingCard from "../layout/LoadingCard";
 import { fetchArticleByRelated } from "@/lib/axios/action/article";
 import Link from "next/link";
 import { ArticlesResponse, ResultArtilce } from "@/types/data";
+import { FileX } from "lucide-react";
 
 export default function RelatedNews({ slug }: { slug: string }) {
 
@@ -12,25 +13,9 @@ export default function RelatedNews({ slug }: { slug: string }) {
         queryFn: () => fetchArticleByRelated(slug),
     });
 
-    if (isLoading) return <LoadingCard />
-    if (isError)
-        return (
-            <NoData
-                title="Artikel Tidak Ditemukan"
-                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
-                backUrl="/"
-                backLabel="Kembali ke Beranda"
-            />
-        );
-    if (!data)
-        return (
-            <NoData
-                title="Artikel Tidak Ditemukan"
-                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
-                backUrl="/"
-                backLabel="Kembali ke Beranda"
-            />
-        );
+    if (isLoading) return null
+    if (isError) return null
+
 
 
     return (
@@ -51,11 +36,37 @@ export default function RelatedNews({ slug }: { slug: string }) {
                                 <h4 className="font-semibold text-sm text-gray-900 group-hover:text-sky-600 transition line-clamp-2 mb-2">
                                     {news.title}
                                 </h4>
-                                {/* <p className="text-xs text-gray-500">{news.date}</p> */}
+                                <p className="text-xs text-gray-500">
+                                    {(() => {
+                                        const date =
+                                            typeof news.updated_at === "string"
+                                                ? new Date(news.updated_at)
+                                                : news.updated_at instanceof Date
+                                                    ? news.updated_at
+                                                    : null;
+                                        if (!date || isNaN(date.getTime())) return "";
+                                        return date.toLocaleString("id-ID", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "2-digit",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            hour12: false,
+                                        }).replace(/\.(\d\d)$/, ':$1').replace(",", "");
+                                    })()}
+                                </p>
                             </div>
                         </div>
                     </Link>
                 ))}
+                {(data.length <= 0) && (
+                    <div className="col-span-full gap-2 flex flex-col items-center justify-center py-8 border rounded-lg bg-gray-50 text-gray-500">
+                        <FileX />
+                        <span className="text-base font-medium">
+                            Tidak ada berita terkait untuk saat ini.
+                        </span>
+                    </div>
+                )}
             </div>
         </div>
     )

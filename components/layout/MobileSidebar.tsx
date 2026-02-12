@@ -29,13 +29,15 @@ const MobileSidebar = ({
         },
         { label: 'Ekonomi', href: '/ekonomi', submenu: null },
         {
-            label: 'Hukum & Politik', href: '/hukum-politik', submenu: [
-                { label: 'Hukum', href: '/hukum' },
-                { label: 'Politik', href: '/politik' },
+            label: 'Hukum & Politik', href: '/hukum-dan-politik', submenu: [
+                { label: 'Show All', href: '/hukum-dan-politik' },
+                { label: 'Hukum', href: '/hukum-dan-politik/hukum' },
+                { label: 'Politik', href: '/hukum-dan-politik/politik' },
             ]
         },
         { label: 'Olahraga', href: '/olahraga', submenu: null },
         { label: 'Nasional', href: '/nasional', submenu: null },
+        { label: 'Internasional', href: '/internasional', submenu: null },
         { label: 'Hiburan & Life Style', href: '/hiburan', submenu: null },
         { label: 'Artikel & ADV', href: '/artikel', submenu: null },
         { label: 'Tentang Kami', href: '/tentang-kami', submenu: null },

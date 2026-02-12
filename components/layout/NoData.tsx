@@ -10,8 +10,8 @@ interface NoDataProps {
 }
 
 export default function NoData({
-    title = 'Tidak Ada Data',
-    message = 'Maaf, data yang Anda cari tidak ditemukan.',
+    title = 'Berita Kosang',
+    message = 'Tidak ada berita untuk saat ini.',
     showBackButton = true,
     backUrl = '/',
     backLabel = 'Kembali ke Beranda'
@@ -30,9 +30,7 @@ export default function NoData({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                    {title}
-                </h3>
+
 
                 {/* Message */}
                 <p className="text-gray-600 mb-8 leading-relaxed">

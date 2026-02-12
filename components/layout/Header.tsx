@@ -6,11 +6,14 @@ import { Menu, Search, ChevronDown } from 'lucide-react'
 import AdBanner from './AdBanner'
 import Image from 'next/image'
 import HeaderAds from '../ads/HeaderAds'
+import MobileSidebar from './MobileSidebar'
 
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -51,7 +54,6 @@ const Header = () => {
     ]
 
     const hukumPolitikSubmenu = [
-        { label: 'Show All', href: '/hukum-dan-politik' },
         { label: 'Hukum', href: '/hukum-dan-politik/hukum' },
         { label: 'Politik', href: '/hukum-dan-politik/politik' },
     ]
@@ -81,6 +83,10 @@ const Header = () => {
     return (
         <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white border-b border-gray-200'
             }`}>
+            <MobileSidebar
+                isOpen={isSidebarOpen}
+                onClose={() => setIsSidebarOpen(false)}
+            />
             {/* Top Bar with Ad */}
             <div className="bg-gradient-to-r from-sky-600 to-sky-500 text-white">
                 <div className="container mx-auto px-4">
@@ -132,7 +138,7 @@ const Header = () => {
 
                         {/* Mobile Menu Button */}
                         <button
-                            // onClick={onMenuClick}
+                            onClick={() => setIsSidebarOpen(true)}
                             className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition"
                         >
                             <Menu className="w-6 h-6 text-gray-700" />
@@ -203,6 +209,9 @@ const Header = () => {
                                 <ChevronDown className="w-4 h-4" />
                             </button>
                             <div className="absolute left-0 top-full mt-0 w-[200px] bg-white text-gray-900 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                <Link href="/hukum-dan-politik" className="block px-3 py-3 hover:bg-gray-100 rounded font-semibold text-sky-600">
+                                    Show All
+                                </Link>
                                 <div className="p-2">
                                     {hukumPolitikSubmenu.map((item) => (
                                         <Link
@@ -278,6 +287,9 @@ const Header = () => {
                         </Link>
                         <Link href="/nasional" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
                             Nasional
+                        </Link>
+                        <Link href="/internasional" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
+                            Internasional
                         </Link>
                     </div>
                 </div>

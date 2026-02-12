@@ -12,26 +12,13 @@ const Footer = () => {
                     {/* About */}
                     <div>
                         <h3 className="text-xl font-bold text-white mb-4">
-                            CELEBES NUSANTARA
+                            CELEBES SULTRA
                         </h3>
                         <p className="text-sm text-gray-400 leading-relaxed">
                             Portal berita terpercaya yang menyajikan informasi terkini dari
                             Sulawesi Tenggara dan seluruh Nusantara.
                         </p>
-                        {/* <div className="flex space-x-4 mt-4">
-                            <a href="#" className="hover:text-sky-400 transition">
-                                <Facebook className="w-5 h-5" />
-                            </a>
-                            <a href="#" className="hover:text-sky-400 transition">
-                                <Twitter className="w-5 h-5" />
-                            </a>
-                            <a href="#" className="hover:text-sky-400 transition">
-                                <Instagram className="w-5 h-5" />
-                            </a>
-                            <a href="#" className="hover:text-sky-400 transition">
-                                <Youtube className="w-5 h-5" />
-                            </a>
-                        </div> */}
+
                     </div>
 
                     {/* Quick Links */}
@@ -59,7 +46,7 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/kontak" className="hover:text-sky-400 transition">
+                                <Link href="tentang-kami/#kontak" className="hover:text-sky-400 transition">
                                     Hubungi Kami
                                 </Link>
                             </li>
@@ -97,6 +84,14 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li>
+                                <Link
+                                    href="/internasional"
+                                    className="hover:text-sky-400 transition"
+                                >
+                                    Internasional
+                                </Link>
+                            </li>
+                            <li>
                                 <Link href="/hiburan" className="hover:text-sky-400 transition">
                                     Hiburan & Life Style
                                 </Link>
@@ -123,11 +118,13 @@ const Footer = () => {
                             <div>
                                 <p className="font-medium mb-1">Alamat:</p>
                                 <p className="text-gray-400">
-                                    Jl. Example No. 123
+                                    Jalan D.I Panjaitan Komplek BTN Pepabri Lepo-Lepo Indah, Blok A.10
+                                    No. 20
                                     <br />
-                                    Kendari, Sulawesi Tenggara
+                                    Desa/Kelurahan Wundudopi, Kec. Baruga, Kota Kendari, Provinsi
+                                    Sulawesi T enggara
                                     <br />
-                                    Indonesia 93111
+                                    Kode Pos: 93116
                                 </p>
                             </div>
                         </div>
@@ -137,7 +134,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="border-t border-gray-800 mt-8 pt-8 text-center text-xs md:text-sm text-gray-500">
                     <p>&copy; {year} CELEBES NUSANTARA. All rights reserved.</p>
-                    <p>Designed by Scale</p>
+                    <Link href={"https://scale.web.id"} target="_blank" >Designed by Scale</Link>
                 </div>
             </div>
         </footer>
