@@ -5,16 +5,15 @@ import { fetchArticleByRelated } from "@/lib/axios/action/article";
 import Link from "next/link";
 import { ArticlesResponse, ResultArtilce } from "@/types/data";
 import { FileX } from "lucide-react";
+import { use } from "react";
 
-export default function RelatedNews({ slug }: { slug: string }) {
+export default function RelatedNews({ dataRelatedArticle }: { dataRelatedArticle: Promise<ResultArtilce[]> }) {
 
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['related-articles', slug],
-        queryFn: () => fetchArticleByRelated(slug),
-    });
 
-    if (isLoading) return null
-    if (isError) return null
+    const data = use(dataRelatedArticle)
+
+
+    if (!data) return null
 
 
 

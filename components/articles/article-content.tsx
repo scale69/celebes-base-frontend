@@ -1,28 +1,17 @@
 'use client'
 
-import { useState } from 'react'
-import { useParams } from 'next/navigation'
+import { use } from 'react'
 import { Calendar, User, Share2, Facebook, Twitter, TagIcon } from 'lucide-react'
-import Link from 'next/link'
 import AdBanner from '@/components/layout/AdBanner'
-import { useQuery } from '@tanstack/react-query'
 import { ResultArtilce, Tag } from '@/types/data'
 import Image from 'next/image'
-import LoadingContent from '@/components/layout/LoadingContent'
-import NoData from '@/components/layout/NoData'
-import { fetchArticleBySlug } from '@/lib/axios/action/article'
+
 import RelatedNews from './RelatedNews'
+import NoData from '../layout/NoData'
 
-const ArtikelDetailPage = ({ slug, getData }: { slug: string, getData: ResultArtilce }) => {
+const ArtikelDetailPage = ({ dataArtcle, dataRelatedArticle }: { dataArtcle: Promise<ResultArtilce>, dataRelatedArticle: Promise<ResultArtilce[]> }) => {
+    const article = use(dataArtcle)
 
-
-    const { data: article, isLoading } = useQuery<ResultArtilce>({
-        queryKey: ['articles', slug],
-        queryFn: () => fetchArticleBySlug(slug),
-        placeholderData: getData
-    });
-
-    if (isLoading) return <LoadingContent />
     if (!article) return <NoData
         title="Artikel Tidak Ditemukan"
         message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
@@ -146,7 +135,9 @@ const ArtikelDetailPage = ({ slug, getData }: { slug: string, getData: ResultArt
                     </div>
                 )}
             </div>
-            <RelatedNews slug={article.slug} />
+
+            <RelatedNews dataRelatedArticle={dataRelatedArticle} />
+
         </article>
 
 
