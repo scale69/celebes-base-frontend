@@ -272,7 +272,8 @@ const Header = () => {
             </nav>
 
             {/* Mobile Navigation */}
-            <nav className="lg:hidden bg-gray-900 text-white">
+            {/* <nav className="lg:hidden bg-gray-900 text-white"> */}
+            <nav className="lg:hidden bg-amber-600 text-white">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center space-x-4 py-3 overflow-x-auto">
                         <Link href="/" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
