@@ -18,6 +18,7 @@ const NewsCard = ({ news, featured = false, pathname }: { news: ResultArtilce, f
         <Link
             href={`${!pathname || pathname === '/' ? '/artikel' : pathname}/${news.slug}`}
             aria-label={ariaLabel}
+            prefetch={false}
         >
             <article className={cn(
                 'group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col focus-within:ring-2 focus-within:ring-sky-500',

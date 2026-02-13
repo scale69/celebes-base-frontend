@@ -1,4 +1,3 @@
-// @/components/articles/article-page-template.tsx
 "use server"
 import ArtikelDetailPage from "@/components/articles/article-content";
 import { fetchArticleByRelated, fetchArticleBySlug } from "@/lib/axios/action/article";

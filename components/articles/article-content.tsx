@@ -1,6 +1,6 @@
 'use client'
 
-import { use } from 'react'
+import { Suspense, use } from 'react'
 import { Calendar, User, Share2, Facebook, Twitter, TagIcon } from 'lucide-react'
 import AdBanner from '@/components/layout/AdBanner'
 import { ResultArtilce, Tag } from '@/types/data'
@@ -136,7 +136,9 @@ const ArtikelDetailPage = ({ dataArtcle, dataRelatedArticle }: { dataArtcle: Pro
                 )}
             </div>
 
-            <RelatedNews dataRelatedArticle={dataRelatedArticle} />
+            <Suspense fallback={null}>
+                <RelatedNews dataRelatedArticle={dataRelatedArticle} />
+            </Suspense>
 
         </article>
 

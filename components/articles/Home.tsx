@@ -13,10 +13,7 @@ import AdsTemplate from "../ads/AdsTemplate";
 
 const Home = ({ getData }: { getData: Promise<ArticlesResponse> }) => {
     const categories = ["SULTRA", "Ekonomi", "Olahraga"];
-
-
     const data = use(getData)
-
     // if (isLoading) return <LoadingCard />
     if (!data)
         return (
@@ -58,8 +55,6 @@ const Home = ({ getData }: { getData: Promise<ArticlesResponse> }) => {
                     ))}
                 </div>
             </section>
-
-
             {categories.map((category) => (
                 <CategorySection
                     key={category}
@@ -67,9 +62,6 @@ const Home = ({ getData }: { getData: Promise<ArticlesResponse> }) => {
                 />
             ))}
         </div>
-
-
-
     );
 };
 

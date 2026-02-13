@@ -1,5 +1,6 @@
 "use server";
 
+import { cache } from "react";
 import axiosInstance from "../instance";
 
 export async function fetchArticles() {
@@ -45,7 +46,8 @@ export async function fetchArticleByTopOrPopulare(field: string) {
     return null;
   }
 }
-export async function fetchArticleBySlug(slug: string) {
+
+export const fetchArticleBySlug = cache(async (slug: string) => {
   const instance = axiosInstance();
   try {
     const res = await instance.get(`/api/articles/${slug}`);
@@ -58,7 +60,21 @@ export async function fetchArticleBySlug(slug: string) {
     }
     return null;
   }
-}
+});
+// export async function fetchArticleBySlug(slug: string) {
+//   const instance = axiosInstance();
+//   try {
+//     const res = await instance.get(`/api/articles/${slug}`);
+//     return res.data;
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       console.log(error.message); // Memperbaiki akses pesan kesalahan
+//     } else {
+//       console.log("An unknown error occurred"); // Menangani kesalahan yang tidak terduga
+//     }
+//     return null;
+//   }
+// }
 export async function fetchArticleByCategoryName(slug: string) {
   const instance = axiosInstance();
   try {

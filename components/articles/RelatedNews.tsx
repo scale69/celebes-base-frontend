@@ -8,11 +8,7 @@ import { FileX } from "lucide-react";
 import { use } from "react";
 
 export default function RelatedNews({ dataRelatedArticle }: { dataRelatedArticle: Promise<ResultArtilce[]> }) {
-
-
     const data = use(dataRelatedArticle)
-
-
     if (!data) return null
 
 
