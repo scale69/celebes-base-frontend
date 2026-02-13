@@ -1,4 +1,3 @@
-"use client";
 
 
 import NewsCard from "./NewsCard";
@@ -7,19 +6,15 @@ import CategorySection from "./CategorySection";
 import TopNews from "../home/TopNews";
 import NoData from "../layout/NoData";
 import InlineAds from "../ads/InlineAds";
-import { Suspense } from "react";
+import { Suspense, use } from "react";
 import HeaderAds from "../ads/HeaderAds";
 
-interface HomeProps {
-    getData: ArticlesResponse
-    categoryData: any[];      // array data tiap kategori
-    categories: string[];
-}
 
-const Home = ({ getData, categoryData, categories }: HomeProps) => {
+const Home = ({ getData }: { getData: Promise<ArticlesResponse> }) => {
+    const categories = ["SULTRA", "Ekonomi", "Olahraga"];
 
 
-    const data = getData
+    const data = use(getData)
 
     // if (isLoading) return <LoadingCard />
     if (!data)
@@ -82,7 +77,6 @@ const Home = ({ getData, categoryData, categories }: HomeProps) => {
                 <CategorySection
                     key={category}
                     title={category}
-                    categoryData={categoryData[i]}
                 />
             ))}
         </div>

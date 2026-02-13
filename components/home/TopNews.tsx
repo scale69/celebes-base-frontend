@@ -1,3 +1,4 @@
+"use client"
 import { fetchArticleByTopOrPopulare } from "@/lib/axios/action/article";
 import { useQuery } from "@tanstack/react-query";
 import LoadingCard from "../layout/LoadingCard";

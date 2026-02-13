@@ -5,16 +5,12 @@ import { fetchArticleByCategoryName, fetchArticles } from "@/lib/axios/action/ar
 import { Suspense } from "react";
 
 export default async function Page() {
-    const categories = ["SULTRA", "Ekonomi", "Olahraga"];
     // const start = Date.now();
-    const [categoryData, getData] = await Promise.all([
-        Promise.all(categories.map((c) => fetchArticleByCategoryName(c))),
-        fetchArticles()
-    ]);
+    const getData = fetchArticles()
     // console.log('fetchArticles + categories duration:', Date.now() - start, 'ms')
     return (
         <Suspense fallback={<LoadingCard />} >
-            <Home {...{ getData, categoryData, categories }} />
+            <Home {...{ getData }} />
         </Suspense>
     )
 

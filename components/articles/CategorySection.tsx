@@ -5,10 +5,12 @@ import { cn } from '@/lib/utils'
 import { ArticlesResponse, ResultArtilce } from '@/types/data'
 
 import NoData from '../layout/NoData'
+import { fetchArticleByCategoryName } from '@/lib/axios/action/article'
 
-const CategorySection = ({ title, categoryData }: { title: string, categoryData: ArticlesResponse }) => {
+const CategorySection = async ({ title }: { title: string }) => {
 
-    const data = categoryData
+
+    const data = await fetchArticleByCategoryName(title)
 
     // if (isLoading) return <LoadingCard />
 
@@ -22,7 +24,12 @@ const CategorySection = ({ title, categoryData }: { title: string, categoryData:
             />
         );
 
-
+    const colorClasses = {
+        sky: 'border-sky-500 text-sky-600 hover:text-sky-700',
+        emerald: 'border-emerald-500 text-emerald-600 hover:text-emerald-700',
+        orange: 'border-orange-500 text-orange-600 hover:text-orange-700',
+        purple: 'border-purple-500 text-purple-600 hover:text-purple-700',
+    }
 
     return (
         <section className="mb-8">
