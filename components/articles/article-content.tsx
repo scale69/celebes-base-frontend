@@ -16,7 +16,7 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
     const { data: article } = useSuspenseQuery({
         queryKey: ['articles', slug],
         queryFn: () => fetchArticleBySlug(slug),
-        refetchOnMount: true
+        // refetchOnMount dihapus - data sudah di-prefetch di server, tidak perlu fetch ulang
     })
 
 

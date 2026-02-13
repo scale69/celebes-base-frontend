@@ -3,7 +3,8 @@
 import { cache } from "react";
 import axiosInstance from "../instance";
 
-export async function fetchArticles() {
+// Wrap dengan cache untuk request deduplication
+export const fetchArticles = cache(async () => {
   const instance = axiosInstance();
   try {
     const res = await instance.get(`/api/articles/`);
@@ -16,7 +17,7 @@ export async function fetchArticles() {
     }
     return null;
   }
-}
+});
 
 export async function fetchArticleByOrdering(ordering: string) {
   const instance = axiosInstance();
@@ -32,7 +33,8 @@ export async function fetchArticleByOrdering(ordering: string) {
     return null;
   }
 }
-export async function fetchArticleByTopOrPopulare(field: string) {
+// Wrap dengan cache untuk request deduplication
+export const fetchArticleByTopOrPopulare = cache(async (field: string) => {
   const instance = axiosInstance();
   try {
     const res = await instance.get(`/api/articles/?${field}=true`);
@@ -45,9 +47,10 @@ export async function fetchArticleByTopOrPopulare(field: string) {
     }
     return null;
   }
-}
+});
 
-export const fetchArticleBySlug = async (slug: string) => {
+// Wrap dengan cache untuk request deduplication - mencegah duplicate request dalam 1 render
+export const fetchArticleBySlug = cache(async (slug: string) => {
   const instance = axiosInstance();
   try {
     const res = await instance.get(`/api/articles/${slug}`);
@@ -60,7 +63,7 @@ export const fetchArticleBySlug = async (slug: string) => {
     }
     return null;
   }
-};
+});
 // export async function fetchArticleBySlug(slug: string) {
 //   const instance = axiosInstance();
 //   try {
@@ -75,7 +78,8 @@ export const fetchArticleBySlug = async (slug: string) => {
 //     return null;
 //   }
 // }
-export async function fetchArticleByCategoryName(slug: string) {
+// Wrap dengan cache untuk request deduplication
+export const fetchArticleByCategoryName = cache(async (slug: string) => {
   const instance = axiosInstance();
   try {
     const res = await instance.get(`/api/articles/?category=${slug}`);
@@ -88,7 +92,7 @@ export async function fetchArticleByCategoryName(slug: string) {
     }
     return null;
   }
-}
+});
 export async function fetchArticleByCategorySlug(slug: string) {
   const instance = axiosInstance();
   try {
@@ -103,7 +107,8 @@ export async function fetchArticleByCategorySlug(slug: string) {
     return null;
   }
 }
-export async function fetchArticleByRelated(slug: string) {
+// Wrap dengan cache untuk request deduplication
+export const fetchArticleByRelated = cache(async (slug: string) => {
   const instance = axiosInstance();
   try {
     const res = await instance.get(`/api/articles/${slug}/related/`);
@@ -116,4 +121,4 @@ export async function fetchArticleByRelated(slug: string) {
     }
     return null;
   }
-}
+});

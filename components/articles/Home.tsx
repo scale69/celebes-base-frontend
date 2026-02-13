@@ -18,7 +18,7 @@ const Home = () => {
     const { data, isLoading, error } = useQuery({
         queryKey: ['articles'],
         queryFn: fetchArticles,
-        staleTime: 5 * 60 * 1000, // 5 menit
+        // staleTime sudah di-set global di ReactQueryProvider (5 menit)
     })
 
     if (isLoading) return <LoadingCard />

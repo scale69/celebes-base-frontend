@@ -16,7 +16,7 @@ const CategorySection = ({ title }: { title: string }) => {
     const { data, isLoading, error } = useQuery({
         queryKey: ['articles', title],
         queryFn: () => fetchArticleByCategoryName(title),
-        staleTime: 5 * 60 * 1000, // 5 menit
+        // staleTime sudah di-set global di ReactQueryProvider
     })
 
     // const data = await fetchArticleByCategoryName(title)
