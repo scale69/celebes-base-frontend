@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import LeftAds from "../ads/LeftAds";
 import AdsTemplate from "../ads/AdsTemplate";
 
 export default function LeftSidebar() {

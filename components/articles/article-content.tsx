@@ -1,16 +1,25 @@
 'use client'
 
-import { Suspense, use } from 'react'
 import { Calendar, User, Share2, Facebook, Twitter, TagIcon } from 'lucide-react'
-import AdBanner from '@/components/layout/AdBanner'
-import { ResultArtilce, Tag } from '@/types/data'
 import Image from 'next/image'
 
 import RelatedNews from './RelatedNews'
 import NoData from '../layout/NoData'
+import { fetchArticleBySlug } from '@/lib/axios/action/article'
+import { useQuery } from '@tanstack/react-query'
+import LoadingContent from '../layout/LoadingContent'
+import { Tag } from '@/types/data'
+import AdsTemplate from '../ads/AdsTemplate'
 
-const ArtikelDetailPage = ({ dataArtcle, dataRelatedArticle }: { dataArtcle: Promise<ResultArtilce>, dataRelatedArticle: Promise<ResultArtilce[]> }) => {
-    const article = use(dataArtcle)
+const ArtikelDetailPage = ({ slug }: { slug: string }) => {
+
+    const { data: article, isLoading, error } = useQuery({
+        queryKey: ['articles', slug],
+        queryFn: () => fetchArticleBySlug(slug),
+        staleTime: 5 * 60 * 1000, // 5 menit
+    })
+
+    if (isLoading) return <LoadingContent />
 
     if (!article) return <NoData
         title="Artikel Tidak Ditemukan"
@@ -18,6 +27,13 @@ const ArtikelDetailPage = ({ dataArtcle, dataRelatedArticle }: { dataArtcle: Pro
         backUrl="/"
         backLabel="Kembali ke Beranda"
     />
+    if (error) return <NoData
+        title="Artikel Tidak Ditemukan"
+        message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
+        backUrl="/"
+        backLabel="Kembali ke Beranda"
+    />
+
 
 
     return (
@@ -118,7 +134,7 @@ const ArtikelDetailPage = ({ dataArtcle, dataRelatedArticle }: { dataArtcle: Pro
 
                 {/* In-Content Ad */}
                 <div className="px-6 pb-6">
-                    <AdBanner size="horizontal" title="Sponsor" />
+                    <AdsTemplate placement='inline' />
                 </div>
 
                 {/* Tags */}
@@ -135,10 +151,10 @@ const ArtikelDetailPage = ({ dataArtcle, dataRelatedArticle }: { dataArtcle: Pro
                     </div>
                 )}
             </div>
-
+            {/* 
             <Suspense fallback={null}>
-                <RelatedNews dataRelatedArticle={dataRelatedArticle} />
-            </Suspense>
+            </Suspense> */}
+            <RelatedNews slug={slug} />
 
         </article>
 

@@ -1,12 +1,8 @@
 "use client"
 
 import { ResultArtilce } from "@/types/data";
-import AdBanner from "./AdBanner";
 import { useQuery } from "@tanstack/react-query";
-import LoadingCard from "./LoadingCard";
-import NoData from "./NoData";
 import { fetchArticleByTopOrPopulare } from "@/lib/axios/action/article";
-import RightAds from "../ads/RightAds";
 import { Suspense } from "react";
 import { FileX } from "lucide-react";
 import AdsTemplate from "../ads/AdsTemplate";

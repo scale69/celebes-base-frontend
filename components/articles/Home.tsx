@@ -1,21 +1,37 @@
 
-
+"use client"
 import NewsCard from "./NewsCard";
-import { ArticlesResponse, ResultArtilce } from "@/types/data";
+import { ResultArtilce } from "@/types/data";
 import CategorySection from "./CategorySection";
 import TopNews from "../home/TopNews";
 import NoData from "../layout/NoData";
-import InlineAds from "../ads/InlineAds";
-import { Suspense, use } from "react";
-import HeaderAds from "../ads/HeaderAds";
+import { Suspense } from "react";
 import AdsTemplate from "../ads/AdsTemplate";
+import { useQuery } from "@tanstack/react-query";
+import { fetchArticles } from "@/lib/axios/action/article";
+import LoadingCard from "../layout/LoadingCard";
 
 
-const Home = ({ getData }: { getData: Promise<ArticlesResponse> }) => {
+const Home = () => {
     const categories = ["SULTRA", "Ekonomi", "Olahraga"];
-    const data = use(getData)
-    // if (isLoading) return <LoadingCard />
+
+    const { data, isLoading, error } = useQuery({
+        queryKey: ['articles'],
+        queryFn: fetchArticles,
+        staleTime: 5 * 60 * 1000, // 5 menit
+    })
+
+    if (isLoading) return <LoadingCard />
     if (!data)
+        return (
+            <NoData
+                title="Artikel Tidak Ditemukan"
+                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
+                backUrl="/"
+                backLabel="Kembali ke Beranda"
+            />
+        );
+    if (error)
         return (
             <NoData
                 title="Artikel Tidak Ditemukan"

@@ -1,11 +1,9 @@
-import NewsHeader from "@/components/articles/NewsHeader";
-type PageProps = {
-    params: { slug: string };
-    searchParams: Record<string, string | string[] | undefined>;
-};
-export default function Page({ params, searchParams }: PageProps) {
+import CategoryPageTemplate from "@/components/articles/CategoryPageTemplate";
+import { SlugProps } from "@/types/props";
+
+export default async function Page({ params }: SlugProps) {
 
     return (
-        <NewsHeader />
+        <CategoryPageTemplate params={params} />
     )
 }

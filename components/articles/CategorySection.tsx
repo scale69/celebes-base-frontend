@@ -1,20 +1,37 @@
+"use client"
 import Link from 'next/link'
 import NewsCard from './NewsCard'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { ArticlesResponse, ResultArtilce } from '@/types/data'
+import { ResultArtilce } from '@/types/data'
 
 import NoData from '../layout/NoData'
 import { fetchArticleByCategoryName } from '@/lib/axios/action/article'
+import { useQuery } from '@tanstack/react-query'
+import LoadingCard from '../layout/LoadingCard'
 
-const CategorySection = async ({ title }: { title: string }) => {
+const CategorySection = ({ title }: { title: string }) => {
 
 
-    const data = await fetchArticleByCategoryName(title)
+    const { data, isLoading, error } = useQuery({
+        queryKey: ['articles', title],
+        queryFn: () => fetchArticleByCategoryName(title),
+        staleTime: 5 * 60 * 1000, // 5 menit
+    })
 
-    // if (isLoading) return <LoadingCard />
+    // const data = await fetchArticleByCategoryName(title)
+    if (isLoading) return <LoadingCard />
 
     if (!data)
+        return (
+            <NoData
+                title="Artikel Tidak Ditemukan"
+                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
+                backUrl="/"
+                backLabel="Kembali ke Beranda"
+            />
+        );
+    if (error)
         return (
             <NoData
                 title="Artikel Tidak Ditemukan"

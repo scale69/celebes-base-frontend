@@ -1,15 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
 import NoData from "../layout/NoData";
-import LoadingCard from "../layout/LoadingCard";
 import { fetchArticleByRelated } from "@/lib/axios/action/article";
 import Link from "next/link";
-import { ArticlesResponse, ResultArtilce } from "@/types/data";
+import { ResultArtilce } from "@/types/data";
 import { FileX } from "lucide-react";
-import { use } from "react";
 
-export default function RelatedNews({ dataRelatedArticle }: { dataRelatedArticle: Promise<ResultArtilce[]> }) {
-    const data = use(dataRelatedArticle)
-    if (!data) return null
+export default function RelatedNews({ slug }: { slug: string }) {
+
+    const { data, isLoading, error } = useQuery({
+        queryKey: ['related-articles', slug],
+        queryFn: () => fetchArticleByRelated(slug),
+        staleTime: 5 * 60 * 1000, // 5 menit
+    })
+
+    if (isLoading) return null
+
+
+    if (error) return <NoData
+        title="Artikel Tidak Ditemukan"
+        message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
+        backUrl="/"
+        backLabel="Kembali ke Beranda"
+    />
+
+
 
 
 

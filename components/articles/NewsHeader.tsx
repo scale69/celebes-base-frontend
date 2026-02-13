@@ -34,6 +34,8 @@ export default function NewsHeader() {
     const { data, isLoading, isError } = useQuery<ArticlesResponse>({
         queryKey: ["articles", slug],
         queryFn: () => fetchArticleByCategorySlug(slug),
+        staleTime: 5 * 60 * 1000, // 5 menit
+
     });
 
     if (isLoading) return <LoadingCard />;

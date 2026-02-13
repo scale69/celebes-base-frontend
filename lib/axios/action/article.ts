@@ -47,7 +47,7 @@ export async function fetchArticleByTopOrPopulare(field: string) {
   }
 }
 
-export const fetchArticleBySlug = cache(async (slug: string) => {
+export const fetchArticleBySlug = async (slug: string) => {
   const instance = axiosInstance();
   try {
     const res = await instance.get(`/api/articles/${slug}`);
@@ -60,7 +60,7 @@ export const fetchArticleBySlug = cache(async (slug: string) => {
     }
     return null;
   }
-});
+};
 // export async function fetchArticleBySlug(slug: string) {
 //   const instance = axiosInstance();
 //   try {

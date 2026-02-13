@@ -8,7 +8,7 @@ import { Ads } from "@/types/data";
 
 
 
-export default function AdsTemplate({ placement, location }: { placement: string, location?: string }) {
+export default function AdsTemplate({ placement, location }: { placement: "inline" | "header" | "left sidebar" | "right sidebar", location?: string }) {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
@@ -22,41 +22,61 @@ export default function AdsTemplate({ placement, location }: { placement: string
 
 
 
-
-
     const { data, isLoading, isError } = useQuery({
         queryKey: ["ads", placement, fullURL],
         queryFn: () => fetchAds(placement, fullURL),
     });
 
-    if (isLoading) return <AdBanner size="sidebar" title="Iklan" className="mb-4" />
-    if (isError) return <AdBanner size="sidebar" title="Iklan" className="mb-4" />
+    if (isLoading) return null
+    // if (isError) return <AdBanner size="sidebar" title="Iklan" className="mb-4" />
 
-    if (data.length <= 0) return <AdBanner size="sidebar" title="Iklan" className="mb-4" />
+    if (!data) return null
+
+    // if (data.length <= 0) return <AdBanner placement={placement} size="sidebar" title="Iklan" className="mb-4" />
+    if (data.length <= 0) return null
     return (
         <div
-            className="flex  flex-col gap-4 mb-8"
+            className="flex  flex-col gap-4 "
             role="complementary"
             aria-label="Advertisement"
 
         >
-            {location === "top" ? (
-                data.slice(0, 1).map((ads: Ads) => (
-                    <div key={ads.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
+            {(placement === "right sidebar") && (
+                location === "top" ? (
+                    data.slice(0, 1).map((ads: Ads) => (
+                        <div key={ads?.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
 
-                    >
-                        <Image
-                            src={`${ads.image}`}
-                            alt={ads.placement}
-                            width={400}
-                            height={700}
-                            unoptimized
-                            className="w-full h-full"
-                        />
-                    </div>
-                ))
-            ) : (
-                data.slice(1).map((ads: Ads) => (
+                        >
+                            <Image
+                                src={`${ads.image}`}
+                                alt={ads.placement}
+                                width={400}
+                                height={700}
+                                unoptimized
+                                className="w-full h-full"
+                            />
+                        </div>
+                    ))
+                ) : (
+                    data.slice(1).map((ads: Ads) => (
+                        <div key={ads.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
+
+                        >
+                            <Image
+                                src={`${ads.image}`}
+                                alt={ads.placement}
+                                width={400}
+                                height={700}
+                                unoptimized
+                                className="w-full h-full"
+                            />
+                        </div>
+                    ))
+                )
+            )}
+
+            {(placement === "left sidebar") && (
+                data.map((ads: Ads) => (
                     <div key={ads.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
 
                     >
@@ -71,6 +91,28 @@ export default function AdsTemplate({ placement, location }: { placement: string
                     </div>
                 ))
             )}
+            {/* {(placement === "header") && (
+                data.slice(0, 1).map((ads: Ads) => (
+                    <div
+                        key={ads.id}
+                        className={`bg-gradient-to-br w-full h-32 from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden }`}
+                    >
+                        <Image
+                            src={`${ads.image}`}
+                            alt={ads.placement}
+                            width={400}
+                            height={700}
+                            unoptimized
+                            className="w-full h-full"
+                        />
+                    </div>
+                ))
+                    (data.length <= 0) && (
+                    <div className={`${data.length === 0 ? "hidden lg:block" : "block"}`}>
+                        <AdBanner size="header" title="Iklan" className="mb-3 lg:mb-0" />
+                    </div>
+                )
+            )} */}
 
         </div>
     )

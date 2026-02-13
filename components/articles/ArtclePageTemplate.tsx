@@ -1,8 +1,8 @@
 "use server"
 import ArtikelDetailPage from "@/components/articles/article-content";
 import { fetchArticleByRelated, fetchArticleBySlug } from "@/lib/axios/action/article";
-import { Suspense } from "react";
-import LoadingContent from "../layout/LoadingContent";
+
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -13,13 +13,25 @@ export default async function ArticlePageTemplate({
 }: PageProps) {
     const { slug } = await params;
 
+    const queryClient = new QueryClient()
+    // const start = Date.now();
+    await queryClient.prefetchQuery({
+        queryKey: ['articles', slug],
+        queryFn: () => fetchArticleBySlug(slug),
+    })
+    await queryClient.prefetchQuery({
+        queryKey: ['related-articles', slug],
+        queryFn: () => fetchArticleByRelated(slug),
+    })
 
-    const dataArtcle = fetchArticleBySlug(slug)
-    const dataRelatedArticle = fetchArticleByRelated(slug)
+    // console.log('fetchArticles + categories duration:', Date.now() - start, 'ms')
+
+
 
     return (
-        <Suspense fallback={<LoadingContent />}>
-            <ArtikelDetailPage {...{ dataArtcle, dataRelatedArticle }} />
-        </Suspense>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+            <ArtikelDetailPage slug={slug} />
+        </HydrationBoundary>
+
     );
 }

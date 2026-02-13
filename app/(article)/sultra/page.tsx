@@ -1,7 +1,9 @@
-"use server"
-import NewsHeader from "@/components/articles/NewsHeader";
-export default async function Page() {
+import CategoryPageTemplate from "@/components/articles/CategoryPageTemplate";
+import { SlugProps } from "@/types/props";
+
+export default async function Page({ params }: SlugProps) {
+
     return (
-        <NewsHeader />
+        <CategoryPageTemplate params={params} />
     )
 }
