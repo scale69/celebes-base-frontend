@@ -64,21 +64,7 @@ export const fetchArticleBySlug = cache(async (slug: string) => {
     return null;
   }
 });
-// export async function fetchArticleBySlug(slug: string) {
-//   const instance = axiosInstance();
-//   try {
-//     const res = await instance.get(`/api/articles/${slug}`);
-//     return res.data;
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       console.log(error.message); // Memperbaiki akses pesan kesalahan
-//     } else {
-//       console.log("An unknown error occurred"); // Menangani kesalahan yang tidak terduga
-//     }
-//     return null;
-//   }
-// }
-// Wrap dengan cache untuk request deduplication
+
 export const fetchArticleByCategoryName = cache(async (slug: string) => {
   const instance = axiosInstance();
   try {

@@ -6,7 +6,8 @@ const Footer = () => {
     const year = now.getFullYear();
 
     return (
-        <footer className="bg-gray-900 text-gray-300">
+        // <footer className="bg-gray-900 text-gray-300">
+        <footer className="bg-green-900 text-gray-300">
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* About */}
@@ -14,7 +15,7 @@ const Footer = () => {
                         <h3 className="text-xl font-bold text-white mb-4">
                             CELEBES SULTRA
                         </h3>
-                        <p className="text-sm text-gray-400 leading-relaxed">
+                        <p className="text-sm text-gray-200 leading-relaxed">
                             Portal berita terpercaya yang menyajikan informasi terkini dari
                             Sulawesi Tenggara dan seluruh Nusantara.
                         </p>
@@ -117,7 +118,7 @@ const Footer = () => {
                             </div>
                             <div>
                                 <p className="font-medium mb-1">Alamat:</p>
-                                <p className="text-gray-400">
+                                <p className="text-gray-300">
                                     Jalan D.I Panjaitan Komplek BTN Pepabri Lepo-Lepo Indah, Blok A.10
                                     No. 20
                                     <br />
@@ -132,7 +133,7 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-gray-800 mt-8 pt-8 text-center text-xs md:text-sm text-gray-500">
+                <div className="border-t border-gray-800 mt-8 pt-8 text-center text-xs md:text-sm text-gray-300">
                     <p>&copy; {year === year ? year : `2026 - ${year}`} CELEBES SULTRA. All rights reserved.</p>
                     <Link href={"https://scale.web.id"} target="_blank" >Designed by Scale</Link>
                 </div>
