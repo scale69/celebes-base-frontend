@@ -6,20 +6,20 @@ import Image from 'next/image'
 import RelatedNews from './RelatedNews'
 import NoData from '../layout/NoData'
 import { fetchArticleBySlug } from '@/lib/axios/action/article'
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import LoadingContent from '../layout/LoadingContent'
 import { Tag } from '@/types/data'
 import AdsTemplate from '../ads/AdsTemplate'
 
 const ArtikelDetailPage = ({ slug }: { slug: string }) => {
 
-    const { data: article, isLoading, error } = useQuery({
+    const { data: article } = useSuspenseQuery({
         queryKey: ['articles', slug],
         queryFn: () => fetchArticleBySlug(slug),
         refetchOnMount: true
     })
 
-    if (isLoading) return <LoadingContent />
+
 
     if (!article) return <NoData
         title="Artikel Tidak Ditemukan"
@@ -27,12 +27,7 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
         backUrl="/"
         backLabel="Kembali ke Beranda"
     />
-    if (error) return <NoData
-        title="Artikel Tidak Ditemukan"
-        message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
-        backUrl="/"
-        backLabel="Kembali ke Beranda"
-    />
+
 
 
 
