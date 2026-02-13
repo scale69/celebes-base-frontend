@@ -3,28 +3,15 @@ import NewsCard from './NewsCard'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ArticlesResponse, ResultArtilce } from '@/types/data'
-import { useQuery } from '@tanstack/react-query'
-import LoadingCard from '../layout/LoadingCard'
+
 import NoData from '../layout/NoData'
-import { fetchArticleByCategoryName } from '@/lib/axios/action/article'
 
-const CategorySection = ({ title, initialData }: { title: string, initialData: ArticlesResponse }) => {
-    const { data, isLoading, isError } = useQuery<ArticlesResponse>({
-        queryKey: ['articles', title],
-        queryFn: () => fetchArticleByCategoryName(title),
-        placeholderData: initialData
-    });
+const CategorySection = ({ title, categoryData }: { title: string, categoryData: ArticlesResponse }) => {
 
-    if (isLoading) return <LoadingCard />
-    if (isError)
-        return (
-            <NoData
-                title="Artikel Tidak Ditemukan"
-                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
-                backUrl="/"
-                backLabel="Kembali ke Beranda"
-            />
-        );
+    const data = categoryData
+
+    // if (isLoading) return <LoadingCard />
+
     if (!data)
         return (
             <NoData
@@ -35,12 +22,7 @@ const CategorySection = ({ title, initialData }: { title: string, initialData: A
             />
         );
 
-    const colorClasses = {
-        sky: 'border-sky-500 text-sky-600 hover:text-sky-700',
-        emerald: 'border-emerald-500 text-emerald-600 hover:text-emerald-700',
-        orange: 'border-orange-500 text-orange-600 hover:text-orange-700',
-        purple: 'border-purple-500 text-purple-600 hover:text-purple-700',
-    }
+
 
     return (
         <section className="mb-8">

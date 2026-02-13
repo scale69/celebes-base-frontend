@@ -12,16 +12,12 @@ import HeaderAds from "../ads/HeaderAds";
 
 interface HomeProps {
     getData: ArticlesResponse
-    initialData: any[];      // array data tiap kategori
+    categoryData: any[];      // array data tiap kategori
     categories: string[];
 }
 
-const Home = ({ getData, initialData, categories }: HomeProps) => {
-    // const { data, isLoading, isError } = useQuery({
-    //     queryKey: ['articles'],
-    //     queryFn: fetchArticles,
-    //     placeholderData: getData
-    // });
+const Home = ({ getData, categoryData, categories }: HomeProps) => {
+
 
     const data = getData
 
@@ -35,8 +31,6 @@ const Home = ({ getData, initialData, categories }: HomeProps) => {
                 backLabel="Kembali ke Beranda"
             />
         );
-
-
 
     return (
 
@@ -88,7 +82,7 @@ const Home = ({ getData, initialData, categories }: HomeProps) => {
                 <CategorySection
                     key={category}
                     title={category}
-                    initialData={initialData[i]}
+                    categoryData={categoryData[i]}
                 />
             ))}
         </div>
