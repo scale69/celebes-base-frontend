@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import LeftAds from "../ads/LeftAds";
+import AdsTemplate from "../ads/AdsTemplate";
 
 export default function LeftSidebar() {
     return (
@@ -10,7 +11,7 @@ export default function LeftSidebar() {
         >
             <div className="sticky">
                 <Suspense fallback={null}>
-                    <LeftAds />
+                    <AdsTemplate placement="left sidebar" />
                 </Suspense>
             </div>
 

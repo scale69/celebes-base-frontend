@@ -1,7 +1,7 @@
 "use server"
 import Home from "@/components/articles/Home";
 import LoadingCard from "@/components/layout/LoadingCard";
-import { fetchArticleByCategoryName, fetchArticles } from "@/lib/axios/action/article";
+import { fetchArticles } from "@/lib/axios/action/article";
 import { Suspense } from "react";
 
 export default async function Page() {

@@ -8,6 +8,7 @@ import NoData from "../layout/NoData";
 import InlineAds from "../ads/InlineAds";
 import { Suspense, use } from "react";
 import HeaderAds from "../ads/HeaderAds";
+import AdsTemplate from "../ads/AdsTemplate";
 
 
 const Home = ({ getData }: { getData: Promise<ArticlesResponse> }) => {
@@ -36,11 +37,11 @@ const Home = ({ getData }: { getData: Promise<ArticlesResponse> }) => {
 
             {/* Ad inline Banner */}
             <Suspense fallback={null}>
-                <InlineAds />
+                <AdsTemplate placement="inline" />
             </Suspense>
             <div className="block lg:hidden">
                 <Suspense fallback={null}>
-                    <HeaderAds />
+                    <AdsTemplate placement="header" />
                 </Suspense>
             </div>
             {/* Latest News Grid */}

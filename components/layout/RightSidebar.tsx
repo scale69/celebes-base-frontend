@@ -9,6 +9,7 @@ import { fetchArticleByTopOrPopulare } from "@/lib/axios/action/article";
 import RightAds from "../ads/RightAds";
 import { Suspense } from "react";
 import { FileX } from "lucide-react";
+import AdsTemplate from "../ads/AdsTemplate";
 
 export default function RightSidebar() {
 
@@ -31,7 +32,7 @@ export default function RightSidebar() {
                 {/* Ad */}
                 <div aria-label="Advertisement">
                     <Suspense fallback={null}>
-                        <RightAds location="top" />
+                        <AdsTemplate placement="right sidebar" location="top" />
                     </Suspense>
                 </div>
 
@@ -89,7 +90,7 @@ export default function RightSidebar() {
                 <div aria-label="Advertisement">
                     {/* <AdBanner size="square" title="Sponsor" /> */}
                     <Suspense fallback={null}>
-                        <RightAds location="bottom" />
+                        <AdsTemplate placement="right sidebar" location="bottom" />
                     </Suspense>
                 </div>
             </div>
