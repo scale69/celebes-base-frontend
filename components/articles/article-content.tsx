@@ -16,7 +16,7 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
     const { data: article, isLoading, error } = useQuery({
         queryKey: ['articles', slug],
         queryFn: () => fetchArticleBySlug(slug),
-        staleTime: 5 * 60 * 1000, // 5 menit
+        refetchOnMount: true
     })
 
     if (isLoading) return <LoadingContent />
@@ -37,7 +37,7 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
 
 
     return (
-        <article>
+        <article className=''>
 
             <div className="bg-white rounded-lg shadow-sm ">
                 {/* Category Badge */}
@@ -99,15 +99,15 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
                 </div>
 
                 {/* Featured Image */}
-                <div className=" px-6 pt-6">
-                    <div className="relative group w-full overflow-hidden">
+                <div className="flex items-center justify-center px-6 pt-6 ">
+                    <div className="relative w-max  group justify-center items-center overflow-hidden shadow-xl hover:shadow-md ">
                         <Image
                             width={600}
                             height={400}
                             src={`${article?.image}`}
                             alt={article.image_description}
                             unoptimized
-                            className="w-full max-h-[400px] rounded-lg transition-transform duration-500 group-hover:scale-105 shadow-md"
+                            className="w-full h-auto rounded-lg transition-transform duration-500 group-hover:scale-105 shadow-md"
                             style={{ height: "auto" }}
                         />
                         <div className="absolute  p-5 inset-0 bg-gradient-to-t  from-black/70 to-transparent opacity-0 group-hover:opacity-100 duration-500 flex items-end ">

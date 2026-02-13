@@ -4,6 +4,6 @@ import { SlugProps } from "@/types/props";
 export default async function Page({ params }: SlugProps) {
 
     return (
-        <CategoryPageTemplate params={params} />
+        <CategoryPageTemplate />
     )
 }
