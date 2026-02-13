@@ -1,6 +1,8 @@
 "use server"
 import Home from "@/components/articles/Home";
+import LoadingCard from "@/components/layout/LoadingCard";
 import { fetchArticleByCategoryName, fetchArticles } from "@/lib/axios/action/article";
+import { Suspense } from "react";
 
 export default async function Page() {
     const categories = ["SULTRA", "Ekonomi", "Olahraga"];
@@ -11,7 +13,9 @@ export default async function Page() {
     ]);
     // console.log('fetchArticles + categories duration:', Date.now() - start, 'ms')
     return (
-        <Home getData={getData} initialData={initialData} categories={categories} />
+        <Suspense fallback={<LoadingCard />} >
+            <Home {...{ getData, initialData, categories }} />
+        </Suspense>
     )
 
 }

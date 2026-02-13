@@ -3,7 +3,6 @@
 import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { Menu, Search, ChevronDown, Home } from 'lucide-react'
-import AdBanner from './AdBanner'
 import Image from 'next/image'
 import HeaderAds from '../ads/HeaderAds'
 import MobileSidebar from './MobileSidebar'

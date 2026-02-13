@@ -16,7 +16,10 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-
+type PageProps = {
+    params: { slug: string };
+    searchParams: Record<string, string | string[] | undefined>;
+};
 export default function NewsHeader() {
     const pathname = usePathname();
 

@@ -2,11 +2,8 @@
 
 
 import NewsCard from "./NewsCard";
-import { fetchArticles } from "@/lib/axios/action/article";
-import { useQuery } from "@tanstack/react-query";
 import { ArticlesResponse, ResultArtilce } from "@/types/data";
 import CategorySection from "./CategorySection";
-import LoadingCard from "../layout/LoadingCard";
 import TopNews from "../home/TopNews";
 import NoData from "../layout/NoData";
 import InlineAds from "../ads/InlineAds";
@@ -20,22 +17,15 @@ interface HomeProps {
 }
 
 const Home = ({ getData, initialData, categories }: HomeProps) => {
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['articles'],
-        queryFn: fetchArticles,
-        placeholderData: getData
-    });
+    // const { data, isLoading, isError } = useQuery({
+    //     queryKey: ['articles'],
+    //     queryFn: fetchArticles,
+    //     placeholderData: getData
+    // });
 
-    if (isLoading) return <LoadingCard />
-    if (isError)
-        return (
-            <NoData
-                title="Artikel Tidak Ditemukan"
-                message="Maaf, artikel yang Anda cari tidak ditemukan atau mungkin telah dihapus."
-                backUrl="/"
-                backLabel="Kembali ke Beranda"
-            />
-        );
+    const data = getData
+
+    // if (isLoading) return <LoadingCard />
     if (!data)
         return (
             <NoData
@@ -45,6 +35,7 @@ const Home = ({ getData, initialData, categories }: HomeProps) => {
                 backLabel="Kembali ke Beranda"
             />
         );
+
 
 
     return (
