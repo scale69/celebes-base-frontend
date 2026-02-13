@@ -59,22 +59,8 @@ const Home = ({ getData }: { getData: Promise<ArticlesResponse> }) => {
                 </div>
             </section>
 
-            {/* Category Sections */}
-            {/* <CategorySection
-                title="SULTRA"
 
-                color="sky"
-            />
-            <CategorySection
-                title="Ekonomi"
-                color="emerald"
-            />
-            <CategorySection
-                title="Olahraga"
-                color="orange"
-            /> */}
-
-            {categories.map((category, i) => (
+            {categories.map((category) => (
                 <CategorySection
                     key={category}
                     title={category}

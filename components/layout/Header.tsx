@@ -82,10 +82,10 @@ const Header = () => {
     return (
         <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white border-b border-gray-200'
             }`}>
-            <MobileSidebar
+            {/* <MobileSidebar
                 isOpen={isSidebarOpen}
                 onClose={() => setIsSidebarOpen(false)}
-            />
+            /> */}
             {/* Top Bar with Ad */}
             <div className="bg-gradient-to-r from-sky-600 to-sky-500 text-white">
                 <div className="container mx-auto px-4">
@@ -140,7 +140,7 @@ const Header = () => {
                             onClick={() => setIsSidebarOpen(true)}
                             className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition"
                         >
-                            <Menu className="w-6 h-6 text-gray-700" />
+                            {/* <Menu className="w-6 h-6 text-gray-700" /> */}
                         </button>
                     </div>
                 </div>
@@ -272,7 +272,7 @@ const Header = () => {
             </nav>
 
             {/* Mobile Navigation */}
-            <nav className="lg:hidden bg-gray-900 text-white">
+            {/* <nav className="lg:hidden bg-gray-900 text-white">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center space-x-4 py-3 overflow-x-auto">
                         <Link href="/" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
@@ -292,7 +292,7 @@ const Header = () => {
                         </Link>
                     </div>
                 </div>
-            </nav>
+            </nav> */}
 
             {/* Search Modal */}
             {/* <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} /> */}
