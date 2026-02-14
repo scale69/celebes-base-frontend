@@ -30,10 +30,10 @@ export default function InlineAds() {
         queryFn: () => fetchAds(placement, fullURL),
     });
 
-    if (isLoading) return <AdBanner size="horizontal" title="Iklan" className="mb-4" />
-    if (isError) return <AdBanner size="horizontal" title="Iklan" className="mb-4" />
+    // if (isLoading) return <AdBanner size="horizontal" title="Iklan" className="mb-4" />
+    // if (isError) return <AdBanner size="horizontal" title="Iklan" className="mb-4" />
 
-    if (data.length <= 0) return <AdBanner size="horizontal" title="Iklan" className="mb-4" />
+    // if (data.length <= 0) return <AdBanner size="horizontal" title="Iklan" className="mb-4" />
     return (
         <div
             className="flex  flex-col gap-4 mb-8"

@@ -28,8 +28,8 @@ export default function HeaderAds() {
         queryFn: () => fetchAds(placement, fullURL),
     });
 
-    if (isLoading) return <AdBanner size="header" title="Iklan" />
-    if (isError) return <AdBanner size="header" title="Iklan" />
+    // if (isLoading) return <AdBanner size="header" title="Iklan" />
+    // if (isError) return <AdBanner size="header" title="Iklan" />
 
     return (
         <div
