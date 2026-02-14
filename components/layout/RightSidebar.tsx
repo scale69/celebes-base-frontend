@@ -1,4 +1,3 @@
-"use client"
 
 import { ResultArtilce } from "@/types/data";
 import { useQuery } from "@tanstack/react-query";
@@ -7,20 +6,21 @@ import { Suspense } from "react";
 import { FileX } from "lucide-react";
 import AdsTemplate from "../ads/AdsTemplate";
 
-export default function RightSidebar() {
+export default async function RightSidebar() {
 
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['articles', "popular_article"],
-        queryFn: () => fetchArticleByTopOrPopulare("popular_article"),
-    });
 
-    if (isLoading) return null
-    if (isError) return null
-    if (!data) return null
+
+    const data = await fetchArticleByTopOrPopulare("popular_article")
+
+    // const { data, isLoading, isError } = useQuery({
+    //     queryKey: ['articles', "popular_article"],
+    //     queryFn: () => fetchArticleByTopOrPopulare("popular_article"),
+    // });
+
 
     return (
         <aside
-            className="lg:col-span-3 overflow-scroll"
+            className="lg:col-span-2 overflow-scroll"
             aria-label="Right sidebar"
             role="complementary"
         >

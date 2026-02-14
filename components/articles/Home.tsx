@@ -18,7 +18,6 @@ const Home = () => {
     const { data, isLoading, error } = useQuery({
         queryKey: ['articles'],
         queryFn: fetchArticles,
-        // staleTime sudah di-set global di ReactQueryProvider (5 menit)
     })
 
     if (isLoading) return <LoadingCard />
@@ -42,9 +41,7 @@ const Home = () => {
         );
 
     return (
-
-
-        <div className="lg:col-span-7">
+        <div className="w-full lg:col-span-6">
             {/* Hero Section */}
             <TopNews />
 

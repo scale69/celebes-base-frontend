@@ -1,7 +1,8 @@
 import { Ads } from "./data";
 
 export interface AdBannerProps {
-  size?: "horizontal" | "sidebar" | "square" | "header";
+  size?: "inline" | "left sidebar" | "right sidebar" | "header";
+  // size?: "horizontal" | "sidebar" | "square" | "header";
   title?: string;
   className?: string;
 }

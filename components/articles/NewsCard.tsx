@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calendar, User } from 'lucide-react'
+import { Calendar, CalendarPlusIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { ResultArtilce } from '@/types/data'
@@ -60,7 +60,7 @@ const NewsCard = ({ news, featured = false, pathname }: { news: ResultArtilce, f
                     <div className="flex items-center justify-between text-xs text-gray-500 pt-3 border-t border-gray-100">
                         <div className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" aria-hidden="true" />
-                            <time dateTime={String(news?.updated_at)}>
+                            <time dateTime={String(news?.created_at)}>
                                 {date
                                     ? (() => {
                                         const now = new Date();
@@ -76,8 +76,30 @@ const NewsCard = ({ news, featured = false, pathname }: { news: ResultArtilce, f
                             </time>
                         </div>
                         <div className="flex items-center gap-1">
-                            <User className="w-3 h-3" aria-hidden="true" />
-                            <span>{news.pewarta}</span>
+                            <CalendarPlusIcon className="w-3 h-3" aria-hidden="true" />
+
+                            <span>
+                                {(() => {
+                                    // Pastikan tipe Date valid, jika tidak, parse manual
+                                    const date =
+                                        typeof news.created_at === "string"
+                                            ? new Date(news.created_at)
+                                            : news.created_at instanceof Date
+                                                ? news.created_at
+                                                : null;
+                                    if (!date || isNaN(date.getTime())) return "";
+                                    // Contoh: Minggu, 05 Mei 2024 15.22
+                                    return date.toLocaleString("id-ID", {
+                                        weekday: "long",
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "2-digit",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: false,
+                                    }).replace(/\.(\d\d)$/, ':$1').replace(",", "");
+                                })()}
+                            </span>
                         </div>
                     </div>
                 </div>

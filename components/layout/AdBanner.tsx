@@ -5,12 +5,19 @@ import Image from 'next/image'
 
 
 
-const AdBanner = ({ size = 'horizontal', title = 'Iklan', className }: AdBannerProps) => {
+const AdBanner = ({ size = 'inline', title = 'Iklan', className }: AdBannerProps) => {
+    // const sizeClasses = {
+    //     horizontal: 'w-full h-24 md:h-28',
+    //     sidebar: 'w-full h-64',
+    //     square: 'w-full aspect-square',
+    //     header: 'w-72 h-32 ',
+    // }
+    const replaceSize = size.replace(/\s/g, '').toLowerCase() as string
     const sizeClasses = {
-        horizontal: 'w-full h-24 md:h-28',
-        sidebar: 'w-full h-64',
-        square: 'w-full aspect-square',
-        header: 'w-72 h-32 ',
+        inline: 'w-full h-24 md:h-28',
+        leftsidebar: 'w-full h-64',
+        rightsidebar: 'w-full h-64',
+        header: 'w-full lg:w-72  h-32 ',
     }
 
 
@@ -18,8 +25,8 @@ const AdBanner = ({ size = 'horizontal', title = 'Iklan', className }: AdBannerP
     return (
         <div>
             <div className={cn(
-                'bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden',
-                sizeClasses[size],
+                'bg-gradient-to-br  from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden',
+                sizeClasses[replaceSize as keyof typeof sizeClasses],
                 className
             )}>
                 <div className="text-center">

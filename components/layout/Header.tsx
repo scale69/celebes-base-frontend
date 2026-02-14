@@ -6,6 +6,7 @@ import { Menu, Search, ChevronDown, Home } from 'lucide-react'
 import Image from 'next/image'
 import HeaderAds from '../ads/HeaderAds'
 import MobileSidebar from './MobileSidebar'
+import AdsTemplate from '../ads/AdsTemplate'
 
 
 const Header = () => {
@@ -131,7 +132,8 @@ const Header = () => {
                         {/* Header Ad - Desktop Only */}
                         <div className="hidden lg:block">
                             <Suspense fallback={null}>
-                                <HeaderAds />
+                                {/* <HeaderAds /> */}
+                                <AdsTemplate placement='header' />
                             </Suspense>
                         </div>
 

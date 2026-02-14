@@ -85,14 +85,16 @@ export default function RootLayout({
             <Header />
             <div className=" flex flex-col bg-gray-50 h-full">
               <main
-                className="flex-1"
+                className="flex-1 "
               >
-                <div className=" mx-auto px-4 py-6">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div className="xl:container mx-auto px-4 py-6">
+                  {/* <div className="w-full flex gap-6"> */}
+                  <div className="grid justify-center  grid-cols-1 lg:grid-cols-10 gap-6">
                     {/* Left Ad */}
                     <LeftSidebar />
                     {/* Main Content */}
-                    <div className="lg:col-span-7">
+                    {/* <div className="lg:col-span-7"> */}
+                    <div className=" lg:col-span-6">
                       {children}
                     </div>
                     {/* Right Sidebar */}
