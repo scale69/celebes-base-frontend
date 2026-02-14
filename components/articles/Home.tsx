@@ -46,13 +46,16 @@ const Home = () => {
             <TopNews />
 
             {/* Ad inline Banner */}
-            <Suspense fallback={null}>
-                <AdsTemplate placement="inline" />
-            </Suspense>
-            <div className="block lg:hidden">
+            <div className="flex flex-col justify-center items-center gap-4 my-4 w-full">
+
                 <Suspense fallback={null}>
-                    <AdsTemplate placement="header" />
+                    <AdsTemplate placement="inline" />
                 </Suspense>
+                <div className="block lg:hidden">
+                    <Suspense fallback={null}>
+                        <AdsTemplate placement="header" />
+                    </Suspense>
+                </div>
             </div>
             {/* Latest News Grid */}
             <section aria-labelledby="latest-news-heading" className="mb-8">
