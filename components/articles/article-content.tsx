@@ -67,10 +67,7 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
                                                     year: "numeric",
                                                     month: "long",
                                                     day: "2-digit",
-                                                    hour: "2-digit",
-                                                    minute: "2-digit",
-                                                    hour12: false,
-                                                }).replace(/\.(\d\d)$/, ':$1').replace(",", "");
+                                                })
                                             })()}
                                         </span>
                                     </div>
@@ -96,11 +93,13 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
                             <div className="flex items-center w-full justify-center px-6 pt-6 ">
                                 <div className="relative group justify-center items-center overflow-hidden shadow-xl hover:shadow-md ">
                                     <Image
-                                        width={600}
-                                        height={200}
+                                        width={675}
+                                        height={380}
                                         src={`${article?.image}`}
                                         alt={article.image_description}
                                         unoptimized
+                                        loading="lazy"
+                                        sizes="(max-width: 768px) 100vw, 800px"
                                         className="w-full h-auto  rounded-lg transition-transform duration-500 group-hover:scale-105 shadow-md"
                                     />
                                     <div className="absolute  p-5 inset-0 bg-gradient-to-t  from-black/70 to-transparent opacity-0 group-hover:opacity-100 duration-500 flex items-end ">

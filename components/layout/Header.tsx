@@ -6,12 +6,17 @@ import { Menu, Search, ChevronDown, Home } from 'lucide-react'
 import Image from 'next/image'
 import MobileSidebar from './MobileSidebar'
 import AdsTemplate from '../ads/AdsTemplate'
+import { usePathname } from 'next/navigation'
 
 
 const Header = () => {
+    const pathname = usePathname()
+
     const [isScrolled, setIsScrolled] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+
 
 
     useEffect(() => {
@@ -92,7 +97,7 @@ const Header = () => {
                     <div className="flex items-center justify-between h-10">
                         <div className="flex items-center space-x-4 text-sm">
                             <span>
-                                {dayName} {day}-{month}-{year}
+                                {dayName}, {day} {month} {year}
                             </span>
                             <span className="hidden md:inline">|</span>
                             <span className="hidden md:inline">Kendari, Sulawesi Tenggara</span>
@@ -151,13 +156,13 @@ const Header = () => {
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-start">
                         {/* Home */}
-                        <Link href="/" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
+                        <Link href="/" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                             <Home />
                         </Link>
 
                         {/* SULTRA Dropdown */}
                         <div className="relative group">
-                            <button className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium flex items-center gap-1">
+                            <button className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium flex items-center gap-1 ${pathname.includes("sultra") ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                                 SULTRA
                                 <ChevronDown className="w-4 h-4" />
                             </button>
@@ -197,13 +202,13 @@ const Header = () => {
                         </div>
 
                         {/* Ekonomi */}
-                        <Link href="/ekonomi" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
+                        <Link href="/ekonomi" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/ekonomi' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                             Ekonomi
                         </Link>
 
                         {/* Hukum & Politik Dropdown */}
                         <div className="relative group">
-                            <button className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium flex items-center gap-1">
+                            <button className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium flex items-center gap-1 ${pathname.includes("hukum-dan-politik") ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                                 Hukum & Politik
                                 <ChevronDown className="w-4 h-4" />
                             </button>
@@ -226,32 +231,32 @@ const Header = () => {
                         </div>
 
                         {/* Olahraga */}
-                        <Link href="/olahraga" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
+                        <Link href="/olahraga" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/olahraga' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                             Olahraga
                         </Link>
 
                         {/* Nasional */}
-                        <Link href="/nasional" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
+                        <Link href="/nasional" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/nasional' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                             Nasional
                         </Link>
                         {/* Internasional */}
-                        <Link href="/internasional" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
+                        <Link href="/internasional" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/internasional' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                             Internasional
                         </Link>
 
                         {/* Hiburan & Life Style */}
-                        <Link href="/hiburan-dan-life-style" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
+                        <Link href="/hiburan-dan-life-style" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/hiburan-dan-life-style' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                             Hiburan & Life Style
                         </Link>
 
                         {/* Artikel & ADV */}
-                        <Link href="/artikel-dan-adv" className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block">
+                        <Link href="/artikel-dan-adv" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/artikel-dan-adv' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                             Artikel & ADV
                         </Link>
 
                         {/* Tentang Kami - Right aligned dropdown */}
                         <div className="relative group ml-auto">
-                            <button className="px-4 py-3 hover:bg-sky-600 transition text-sm font-medium flex items-center gap-1">
+                            <button className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium flex items-center gap-1 ${pathname.includes("tentang-kami") ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                                 Tentang Kami
                                 <ChevronDown className="w-4 h-4" />
                             </button>
@@ -276,19 +281,19 @@ const Header = () => {
             <nav className="lg:hidden bg-amber-600 text-white">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center space-x-4 py-3 overflow-x-auto">
-                        <Link href="/" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
+                        <Link href="/" className={`"text-s font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
                             <Home />
                         </Link>
-                        <Link href="/sultra" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
+                        <Link href="/sultra" className={`text-sm font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/sultra' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
                             Sultra
                         </Link>
-                        <Link href="/ekonomi" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
+                        <Link href="/ekonomi" className={`text-sm font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/ekonomi' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
                             Ekonomi
                         </Link>
-                        <Link href="/nasional" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
+                        <Link href="/nasional" className={`text-sm font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/nasional' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
                             Nasional
                         </Link>
-                        <Link href="/olahraga" className="text-sm font-medium whitespace-nowrap hover:text-sky-400 transition">
+                        <Link href="/olahraga" className={`text-sm font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/olahraga' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
                             Olahraga
                         </Link>
                     </div>

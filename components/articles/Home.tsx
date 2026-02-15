@@ -3,13 +3,13 @@
 import NewsCard from "./NewsCard";
 import { ResultArtilce } from "@/types/data";
 import CategorySection from "./CategorySection";
-import TopNews from "../home/TopNews";
 import NoData from "../layout/NoData";
 import { Suspense } from "react";
 import AdsTemplate from "../ads/AdsTemplate";
 import { useQuery } from "@tanstack/react-query";
 import { fetchArticles } from "@/lib/axios/action/article";
 import LoadingCard from "../layout/LoadingCard";
+import TopNews from "./TopNews";
 
 
 const Home = () => {

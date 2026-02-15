@@ -36,11 +36,11 @@ const Footer = () => {
                                     Tentang Kami
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link href="/redaksi" className="hover:text-sky-400 transition">
                                     Redaksi
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link href="/pedoman" className="hover:text-sky-400 transition">
                                     Pedoman Media Siber
@@ -93,7 +93,7 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/hiburan" className="hover:text-sky-400 transition">
+                                <Link href="/hiburan-dan-life-style" className="hover:text-sky-400 transition">
                                     Hiburan & Life Style
                                 </Link>
                             </li>

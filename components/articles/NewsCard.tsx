@@ -5,14 +5,13 @@ import Image from 'next/image'
 import { ResultArtilce } from '@/types/data'
 
 const NewsCard = ({ news, featured = false, pathname }: { news: ResultArtilce, featured?: boolean, pathname?: string }) => {
-    const ariaLabel = `Read article: ${news.title}. Category: ${news.category}. Published on ${news.updated_at} by ${news.pewarta}`
+    const ariaLabel = `Read article: ${news.title}. Category: ${news.category}. Published on ${news.created_at} by ${news.pewarta}`
     const date =
-        typeof news?.updated_at === 'string'
-            ? new Date(news.updated_at)
-            : news?.updated_at instanceof Date
-                ? news.updated_at
+        typeof news?.created_at === 'string'
+            ? new Date(news.created_at)
+            : news?.created_at instanceof Date
+                ? news.created_at
                 : null;
-
 
     return (
         <Link
@@ -29,11 +28,14 @@ const NewsCard = ({ news, featured = false, pathname }: { news: ResultArtilce, f
                         src={`${news?.image}`}
                         alt={`${news?.title} - ${news?.category} news`}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        loading="lazy"
-                        width="800"
-                        height="600"
+                        priority
+                        width={675}
+                        height={380}
                         unoptimized
+                        quality={75}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                     />
+
                     <div className="absolute top-3 left-3">
                         <span
                             className="bg-sky-600 text-white px-3 py-1 rounded-full text-xs font-semibold"
@@ -59,7 +61,7 @@ const NewsCard = ({ news, featured = false, pathname }: { news: ResultArtilce, f
 
                     <div className="flex items-center justify-between text-xs text-gray-500 pt-3 border-t border-gray-100">
                         <div className="flex items-center gap-1">
-                            <Calendar className="w-3 h-3" aria-hidden="true" />
+                            <CalendarPlusIcon className="w-3 h-3" aria-hidden="true" />
                             <time dateTime={String(news?.created_at)}>
                                 {date
                                     ? (() => {
@@ -69,37 +71,16 @@ const NewsCard = ({ news, featured = false, pathname }: { news: ResultArtilce, f
                                         if (diff < 3600) return `${Math.floor(diff / 60)} menit lalu`;
                                         if (diff < 86400) return `${Math.floor(diff / 3600)} jam lalu`;
                                         if (diff < 604800) return `${Math.floor(diff / 86400)} hari lalu`;
-                                        return date.toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                                        return date.toLocaleString("id-ID", {
+                                            weekday: "long",
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "2-digit",
+                                        })
                                     })()
                                     : ''
                                 }
                             </time>
-                        </div>
-                        <div className="flex items-center gap-1">
-                            <CalendarPlusIcon className="w-3 h-3" aria-hidden="true" />
-
-                            <span>
-                                {(() => {
-                                    // Pastikan tipe Date valid, jika tidak, parse manual
-                                    const date =
-                                        typeof news.created_at === "string"
-                                            ? new Date(news.created_at)
-                                            : news.created_at instanceof Date
-                                                ? news.created_at
-                                                : null;
-                                    if (!date || isNaN(date.getTime())) return "";
-                                    // Contoh: Minggu, 05 Mei 2024 15.22
-                                    return date.toLocaleString("id-ID", {
-                                        weekday: "long",
-                                        year: "numeric",
-                                        month: "long",
-                                        day: "2-digit",
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        hour12: false,
-                                    }).replace(/\.(\d\d)$/, ':$1').replace(",", "");
-                                })()}
-                            </span>
                         </div>
                     </div>
                 </div>
