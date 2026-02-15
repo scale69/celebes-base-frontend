@@ -1,4 +1,4 @@
-"use server"
+
 import Home from "@/components/articles/Home";
 import { fetchArticles, fetchArticleByCategoryName, fetchArticleByTopOrPopulare } from "@/lib/axios/action/article";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
