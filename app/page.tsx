@@ -4,6 +4,8 @@ import { fetchArticles, fetchArticleByCategoryName, fetchArticleByTopOrPopulare 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient } from "@/lib/getQueryClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
     // getQueryClient automatically handles server vs client optimization
     const queryClient = getQueryClient()
