@@ -34,7 +34,7 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("http://localhost:3000"),
+  metadataBase: new URL("https://celebessultra.com"),
   openGraph: {
     title: "CELEBES SULTRA - Portal Berita Sulawesi Tenggara",
     description:
@@ -75,6 +75,30 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "CELEBES SULTRA",
+              "url": "https://celebessultra.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://celebessultra.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CELEBES SULTRA",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://celebessultra.com/logo.png"
+                }
+              }
+            })
+          }}
+        />
         <ReactQueryProvider>
           <ThemeProvider
             attribute="class"

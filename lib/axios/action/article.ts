@@ -108,3 +108,19 @@ export const fetchArticleByRelated = cache(async (slug: string) => {
     return null;
   }
 });
+
+export const searchArticles = cache(async (query: string) => {
+  const instance = axiosInstance();
+  try {
+    const res = await instance.get(`/api/articles/?search=${query}`);
+    return res.data;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    } else {
+      console.log("An unknown error occurred");
+    }
+    return null;
+  }
+});
+
