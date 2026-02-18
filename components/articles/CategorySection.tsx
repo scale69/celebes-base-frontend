@@ -8,19 +8,18 @@ import { ResultArtilce } from '@/types/data'
 import NoData from '../layout/NoData'
 import { fetchArticleByCategoryName } from '@/lib/axios/action/article'
 import { useQuery } from '@tanstack/react-query'
-import LoadingCard from '../layout/LoadingCard'
 
-const CategorySection = ({ title }: { title: string }) => {
+const CategorySection = ({ category }: { category: string }) => {
 
 
-    const { data, isLoading, error } = useQuery({
-        queryKey: ['articles', title],
-        queryFn: () => fetchArticleByCategoryName(title),
+    const { data, error } = useQuery({
+        queryKey: ['articles', category],
+        queryFn: () => fetchArticleByCategoryName(category),
         // staleTime sudah di-set global di ReactQueryProvider
     })
 
     // const data = await fetchArticleByCategoryName(title)
-    if (isLoading) return <LoadingCard />
+    // if (isLoading) return <LoadingCard />
 
     if (!data)
         return (
@@ -55,10 +54,10 @@ const CategorySection = ({ title }: { title: string }) => {
                     'text-2xl font-bold text-gray-900 border-l-4 pl-3',
                     // colorClasses[color as keyof typeof colorClasses]
                 )}>
-                    {title}
+                    {category}
                 </h2>
                 <Link
-                    href={`/${title.toLowerCase()}`}
+                    href={`/${category.toLowerCase()}`}
                     className={cn(
                         'flex items-center gap-1 text-sm font-semibold transition',
                         // colorClasses[color as keyof typeof colorClasses]

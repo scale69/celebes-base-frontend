@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { ResultArtilce } from '@/types/data'
 
-const NewsCard = ({ news, featured = false, pathname }: { news: ResultArtilce, featured?: boolean, pathname?: string }) => {
+const NewsCard = ({ news, featured = false }: { news: ResultArtilce, featured?: boolean }) => {
     const ariaLabel = `Read article: ${news.title}. Category: ${news.category}. Published on ${news.created_at} by ${news.pewarta}`
     const date =
         typeof news?.created_at === 'string'

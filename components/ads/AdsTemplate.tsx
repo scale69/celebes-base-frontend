@@ -22,18 +22,16 @@ export default function AdsTemplate({ placement, location }: { placement: "inlin
 
 
 
-    const { data, isLoading, isError } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["ads", placement, fullURL],
         queryFn: () => fetchAds(placement, fullURL),
     });
 
     if (isLoading) return null
-    // if (isError) return <AdBanner size="sidebar" title="Iklan" className="mb-4" />
 
     if (!data) return null
 
     if (data.length <= 0) return <AdBanner size={placement} title="Iklan" className="mb-4" />
-    // if (data.length <= 0) return null
     return (
         <div
             className="flex  flex-col gap-4 "

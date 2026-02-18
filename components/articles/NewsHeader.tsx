@@ -89,7 +89,6 @@ export default function NewsHeader() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {data.results.map((news: ResultArtilce) => (
                             <NewsCard
-                                pathname={pathname}
                                 key={news.id}
                                 news={news}
                                 featured

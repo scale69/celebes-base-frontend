@@ -1,9 +1,8 @@
 import CategoryPageTemplate from "@/components/articles/CategoryPageTemplate";
-import { SlugProps } from "@/types/props";
 
-export default function Page({ params }: SlugProps) {
+export default function Page() {
 
     return (
-        <CategoryPageTemplate params={params} />
+        <CategoryPageTemplate />
     )
 }

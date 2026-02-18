@@ -39,7 +39,7 @@ const MobileSidebar = ({
         { label: 'Nasional', href: '/nasional', submenu: null },
         { label: 'Internasional', href: '/internasional', submenu: null },
         { label: 'Hiburan & Life Style', href: '/hiburan-dan-life-style', submenu: null },
-        { label: 'Artikel & ADV', href: '/artikel', submenu: null },
+        { label: 'Artikel & ADV', href: '/artikel-dan-adv', submenu: null },
         { label: 'Tentang Kami', href: '/tentang-kami', submenu: null },
     ]
 

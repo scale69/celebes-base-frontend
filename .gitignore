@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#ai
+FINAL_OPTIMIZATION.md
+HOMEPAGE_OPTIMIZATION.md
+LOADING_UI.md
+PERFORMANCE_OPTIMIZATION.md

@@ -74,7 +74,7 @@ const Home = () => {
             {categories.map((category) => (
                 <CategorySection
                     key={category}
-                    title={category}
+                    category={category}
                 />
             ))}
         </div>
