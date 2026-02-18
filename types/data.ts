@@ -40,10 +40,14 @@ export interface Author {
   username: string;
   role: string;
 }
-
+export interface ParentCategory {
+  slug: string;
+  name: string;
+}
 export interface Category {
   id: string;
   name: string;
+  parent?: ParentCategory;
   children: ChildrenCategory[];
   color: string;
   slug: string;
@@ -51,6 +55,7 @@ export interface Category {
 export interface ChildrenCategory {
   id: string;
   name: string;
+  parent?: ParentCategory;
   color: string;
   slug: string;
 }

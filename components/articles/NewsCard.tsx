@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calendar, CalendarPlusIcon } from 'lucide-react'
+import { CalendarPlusIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { ResultArtilce } from '@/types/data'
@@ -13,15 +13,18 @@ const NewsCard = ({ news, featured = false, pathname }: { news: ResultArtilce, f
                 ? news.created_at
                 : null;
 
+
+
+
     return (
         <Link
-            href={`${!pathname || pathname === '/' ? '/artikel' : pathname}/${news.slug}`}
+            href={`${news.category.parent?.slug ? `/${news.category.parent.slug}` : ''}/${news.category.slug}/${news.slug}`}
             aria-label={ariaLabel}
             prefetch={false}
         >
             <article className={cn(
                 'group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col focus-within:ring-2 focus-within:ring-sky-500',
-                // featured && 'shadow-md'
+                featured && 'shadow-md'
             )}>
                 <div className="relative overflow-hidden aspect-video">
                     <Image

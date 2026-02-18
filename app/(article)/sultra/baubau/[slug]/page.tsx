@@ -1,7 +1,9 @@
 "use server"
 import ArticlePageTemplate from "@/components/articles/ArtclePageTemplate";
-import { SlugProps } from "@/types/props";
+interface PageProps {
+    params: Promise<{ slug: string }>
+}
 
-export default async function Page({ params }: SlugProps) {
+export default async function Page({ params }: PageProps) {
     return <ArticlePageTemplate params={params} />;
 }

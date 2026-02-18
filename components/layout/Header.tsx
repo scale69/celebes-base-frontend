@@ -50,9 +50,9 @@ const Header = () => {
         },
         {
             label: 'Kepulauan', subItems: [
-                { label: 'Muna & Muna Barat', href: '/sultra/muna' },
+                { label: 'Muna & Muna Barat', href: '/sultra/muna-dan-muna-barat' },
                 { label: 'Baubau', href: '/sultra/baubau' },
-                { label: 'Kepulauan Buton', href: '/sultra/buton' },
+                { label: 'Kepulauan Buton', href: '/sultra/kepulauan-buton' },
             ]
         },
     ]
@@ -83,6 +83,7 @@ const Header = () => {
     const day = now.getDate();
     const month = bulan[now.getMonth()];
     const year = now.getFullYear();
+
 
     return (
         <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white border-b border-gray-200'

@@ -22,9 +22,9 @@ const MobileSidebar = ({
                 { label: 'Kendari', href: '/sultra/kendari' },
                 { label: 'Konawe', href: '/sultra/konawe' },
                 { label: 'Kolaka', href: '/sultra/kolaka' },
-                { label: 'Muna & Muna Barat', href: '/sultra/muna' },
+                { label: 'Muna & Muna Barat', href: '/sultra/muna-dan-muna-barat' },
                 { label: 'Baubau', href: '/sultra/baubau' },
-                { label: 'Kepulauan Buton', href: '/sultra/buton' },
+                { label: 'Kepulauan Buton', href: '/sultra/kepulauan-buton' },
             ]
         },
         { label: 'Ekonomi', href: '/ekonomi', submenu: null },
