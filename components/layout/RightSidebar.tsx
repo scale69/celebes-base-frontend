@@ -5,6 +5,7 @@ import { fetchArticleByTopOrPopulare } from "@/lib/axios/action/article";
 import { Suspense } from "react";
 import { FileX } from "lucide-react";
 import AdsTemplate from "../ads/AdsTemplate";
+import Link from "next/link";
 
 export default async function RightSidebar() {
 
@@ -46,8 +47,8 @@ export default async function RightSidebar() {
                     <ol className="space-y-4 list-none">
                         {data?.results?.slice(0, 4).map((news: ResultArtilce, index: number) => (
                             <li key={news.id}>
-                                <a
-                                    href={`/artikel/${news.slug}`}
+                                <Link
+                                    href={`${news.category.parent?.slug ? `/${news.category.parent.slug}` : ''}/${news.category.slug}/${news.slug}`}
                                     className="flex gap-3 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-500 rounded p-1"
                                     aria-label={`Popular news ${index + 1}: ${news.title}`}
                                 >
@@ -68,7 +69,7 @@ export default async function RightSidebar() {
                                             {/* {news.date} */}
                                         </time>
                                     </div>
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ol>

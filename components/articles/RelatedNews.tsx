@@ -34,7 +34,9 @@ export default function RelatedNews({ slug }: { slug: string }) {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {data.map((news: ResultArtilce) => (
-                    <Link key={news.id} href={`/artikel/${news.slug}`}>
+                    <Link key={news.id}
+                        href={`${news.category.parent?.slug ? `/${news.category.parent.slug}` : ''}/${news.category.slug}/${news.slug}`}
+                    >
                         <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition group">
                             <img
                                 src={`${news.image}`}
