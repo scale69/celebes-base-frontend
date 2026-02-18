@@ -12,11 +12,6 @@ const nextConfig: NextConfig = {
         hostname: "api.celebessultra.com",
         pathname: "**",
       },
-      {
-        protocol: "https",
-        hostname: "localhost",
-        pathname: "**",
-      },
     ],
   },
   /* config options here */
