@@ -113,26 +113,29 @@ export default function AdsTemplate({ placement, location }: AdsProps) {
                 ))
             )}
             {(placement === "header") && (
-                data.slice(0, 1).map((ads: Ads) => (
-                    <div
-                        key={ads?.id}
-                        className={`bg-gradient-to-br w-full h-32 from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden }`}
-                    >
-                        <Image
-                            src={`${ads.image}`}
-                            alt={ads.placement}
-                            width={400}
-                            height={700}
-                            unoptimized
-                            className="w-full h-full"
-                        />
-                    </div>
-                ))
-                    (data.length <= 0) && (
-                    <div className={`${data.length === 0 ? "hidden lg:block" : "block"}`}>
-                        <AdBanner size="header" title="Iklan" className=" lg:mb-0" />
-                    </div>
-                )
+                <>
+                    {data.length > 0 ? (
+                        data.slice(0, 1).map((ads: Ads) => (
+                            <div
+                                key={ads.id}
+                                className="bg-gradient-to-br w-full h-32 from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden"
+                            >
+                                <Image
+                                    src={`${ads.image}`}
+                                    alt={ads.placement}
+                                    width={400}
+                                    height={700}
+                                    unoptimized
+                                    className="w-full h-full"
+                                />
+                            </div>
+                        ))
+                    ) : (
+                        <div className="hidden lg:block">
+                            <AdBanner size="header" title="Iklan" className="lg:mb-0" />
+                        </div>
+                    )}
+                </>
             )}
 
         </div>

@@ -34,7 +34,7 @@ export default async function Page() {
         )
     ])
 
-    console.log('🏠 Homepage fetch completed in:', Date.now() - start, 'ms')
+    // console.log('🏠 Homepage fetch completed in:', Date.now() - start, 'ms')
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
