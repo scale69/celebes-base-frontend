@@ -6,8 +6,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Ads } from "@/types/data";
 
-
-
 export default function AdsTemplate({ placement, location }: { placement: "inline" | "header" | "left sidebar" | "right sidebar", location?: string }) {
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -40,11 +38,25 @@ export default function AdsTemplate({ placement, location }: { placement: "inlin
 
         >
             {(placement === "right sidebar") && (
-                location === "top" && (
+                location === "top" ? (
                     data.slice(0, 1).map((ads: Ads) => (
                         <div key={ads?.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
 
                         >
+                            <Image
+                                src={`${ads.image}`}
+                                alt={ads.placement}
+                                width={400}
+                                height={700}
+                                unoptimized
+                                className="w-full h-full"
+                            />
+                        </div>
+                    ))
+                ) : (
+                    location === "bottom" &&
+                    data.slice(2).map((ads: Ads) => (
+                        <div key={ads?.id} className='bg-gradient-to-br w-full from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'>
                             <Image
                                 src={`${ads.image}`}
                                 alt={ads.placement}
