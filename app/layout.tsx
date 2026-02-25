@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import ReactQueryProvider from "@/lib/ReactQueryProvider";
 import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
+import Script from "next/script";
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -72,6 +73,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning >
+      <header>
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5140008451934617"
+          crossOrigin="anonymous"></Script>
+      </header>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
