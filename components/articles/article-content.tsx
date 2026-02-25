@@ -1,8 +1,7 @@
 'use client'
 
-import { Calendar, TagIcon, User } from 'lucide-react'
+import { Calendar, User, Share2, Facebook, Twitter, TagIcon, Printer } from 'lucide-react'
 import Image from 'next/image'
-import { WhatsappShare, FacebookShare } from 'react-share-lite'
 import RelatedNews from './RelatedNews'
 import NoData from '../layout/NoData'
 import { fetchArticleBySlug } from '@/lib/axios/action/article'
@@ -11,6 +10,19 @@ import { ResultArtilce, Tag } from '@/types/data'
 import AdsTemplate from '../ads/AdsTemplate'
 import { Suspense } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
+import {
+    FacebookShareButton,
+    TwitterShareButton,
+    LinkedinShareButton,
+    WhatsappShareButton,
+    TelegramShareButton,
+    FacebookIcon,
+    TwitterIcon,
+    LinkedinIcon,
+    WhatsappIcon,
+    TelegramIcon,
+} from "next-share";
+
 
 const ArtikelDetailPage = ({ slug }: { slug: string }) => {
     const pathname = usePathname();
@@ -87,12 +99,35 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
                                         <span>{article.pewarta}</span>
                                     </div>
                                     <div className="flex items-center gap-2 ml-auto">
-                                        <WhatsappShare
-                                            size={24}
-                                            round={true}
-                                            url={fullURL}
-                                        />
-                                        <FacebookShare size={24} round={true} url={fullURL} />
+                                        <WhatsappShareButton url={fullURL}>
+                                            <WhatsappIcon size={25} round />
+                                        </WhatsappShareButton>
+                                        <FacebookShareButton url={fullURL}>
+                                            <FacebookIcon size={25} round />
+                                        </FacebookShareButton>
+
+                                        <TwitterShareButton url={fullURL}>
+                                            <TwitterIcon size={25} round />
+                                        </TwitterShareButton>
+
+                                        <LinkedinShareButton url={fullURL}>
+                                            <LinkedinIcon size={25} round />
+                                        </LinkedinShareButton>
+                                        <TelegramShareButton url={fullURL}>
+                                            <TelegramIcon size={25} round />
+                                        </TelegramShareButton>
+                                        <button
+                                            className="hover:text-sky-600 transition"
+                                            onClick={() => {
+                                                if (typeof window !== "undefined") {
+                                                    window.print();
+                                                }
+                                            }}
+                                            title="Cetak Artikel"
+                                        >
+                                            <span className="sr-only">Print</span>
+                                            <Printer />
+                                        </button>
 
                                     </div>
                                 </div>
@@ -132,6 +167,38 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
                                     }}
                                 />
                             </div>
+                            <div className="flex items-center gap-4 w-full py-4 px-8">
+                                <WhatsappShareButton url={fullURL}>
+                                    <WhatsappIcon size={30} round />
+                                </WhatsappShareButton>
+                                <FacebookShareButton url={fullURL}>
+                                    <FacebookIcon size={30} round />
+                                </FacebookShareButton>
+
+                                <TwitterShareButton url={fullURL}>
+                                    <TwitterIcon size={30} round />
+                                </TwitterShareButton>
+
+                                <LinkedinShareButton url={fullURL}>
+                                    <LinkedinIcon size={30} round />
+                                </LinkedinShareButton>
+                                <TelegramShareButton url={fullURL}>
+                                    <TelegramIcon size={30} round />
+                                </TelegramShareButton>
+                                <button
+                                    className="text-slate-950 hover:text-sky-600 transition"
+                                    onClick={() => {
+                                        if (typeof window !== "undefined") {
+                                            window.print();
+                                        }
+                                    }}
+                                    title="Cetak Artikel"
+                                >
+                                    <span className="sr-only">Print</span>
+                                    <Printer size={30} />
+                                </button>
+
+                            </div>
 
                             {/* In-Content Ad */}
                             <div className="px-6 pb-6">
@@ -152,6 +219,7 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
                                 </div>
                             )}
                         </div>
+
 
                         <Suspense fallback={null}>
                             <RelatedNews slug={slug} />
