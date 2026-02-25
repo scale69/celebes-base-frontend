@@ -266,6 +266,9 @@ const Header = () => {
                                     <Link href="/tentang-kami" className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition">
                                         Tentang Kami
                                     </Link>
+                                    <Link href="/redaksi" className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition">
+                                        Redaksi
+                                    </Link>
 
                                     <Link href="/tentang-kami/#kontak" className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition">
                                         Kontak

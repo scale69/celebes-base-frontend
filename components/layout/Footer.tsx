@@ -36,11 +36,11 @@ const Footer = () => {
                                     Tentang Kami
                                 </Link>
                             </li>
-                            {/* <li>
+                            <li>
                                 <Link href="/redaksi" className="hover:text-sky-400 transition">
                                     Redaksi
                                 </Link>
-                            </li> */}
+                            </li>
                             <li>
                                 <Link href="/pedoman" className="hover:text-sky-400 transition">
                                     Pedoman Media Siber

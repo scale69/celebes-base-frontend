@@ -41,6 +41,7 @@ const MobileSidebar = ({
         { label: 'Hiburan & Life Style', href: '/hiburan-dan-life-style', submenu: null },
         { label: 'Artikel & ADV', href: '/artikel-dan-adv', submenu: null },
         { label: 'Tentang Kami', href: '/tentang-kami', submenu: null },
+        { label: 'Redaksi', href: '/redaksi', submenu: null },
     ]
 
     const toggleSubmenu = (label: any) => {
