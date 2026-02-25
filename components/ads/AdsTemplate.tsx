@@ -80,21 +80,38 @@ export default function AdsTemplate({ placement, location }: AdsProps) {
                 )
             )}
 
-            {(placement === "left sidebar") && (
-                data.map((ads: Ads) => (
-                    <div key={ads.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
+            {(placement === "left sidebar") && (location === "bottom" ?
+                (
+                    data.slice(0, 2).map((ads: Ads) => (
+                        <div key={ads.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
 
-                    >
-                        <Image
-                            src={`${ads.image}`}
-                            alt={ads.placement}
-                            width={400}
-                            height={700}
-                            unoptimized
-                            className="w-full h-full"
-                        />
-                    </div>
-                ))
+                        >
+                            <Image
+                                src={`${ads.image}`}
+                                alt={ads.placement}
+                                width={400}
+                                height={700}
+                                unoptimized
+                                className="w-full h-full"
+                            />
+                        </div>
+                    ))
+                ) : (
+                    data.map((ads: Ads) => (
+                        <div key={ads.id} className='bg-gradient-to-br w-full  from-gray-100  to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'
+
+                        >
+                            <Image
+                                src={`${ads.image}`}
+                                alt={ads.placement}
+                                width={400}
+                                height={700}
+                                unoptimized
+                                className="w-full h-full"
+                            />
+                        </div>
+                    ))
+                )
             )}
             {(placement === "inline") && (
                 data.slice(0, 1).map((ads: Ads) => (
@@ -131,8 +148,8 @@ export default function AdsTemplate({ placement, location }: AdsProps) {
                             </div>
                         ))
                     ) : (
-                        <div className="hidden lg:block">
-                            <AdBanner size="header" title="Iklan" className="lg:mb-0" />
+                        <div className="hidden lg:mb-5 lg:block">
+                            <AdBanner size="header" title="Iklan" className="" />
                         </div>
                     )}
                 </>

@@ -70,6 +70,9 @@ const Home = () => {
                     ))}
                 </div>
             </section>
+            <div className="block py-6 lg:py-0 lg:hidden">
+                <AdsTemplate placement="left sidebar" location="bottom" />
+            </div>
             {categories.map((category) => (
                 <CategorySection
                     key={category}
