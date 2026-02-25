@@ -1,8 +1,8 @@
 'use client'
 
-import { Calendar, User, Share2, Facebook, Twitter, TagIcon } from 'lucide-react'
+import { Calendar, TagIcon, User } from 'lucide-react'
 import Image from 'next/image'
-
+import { WhatsappShare, FacebookShare } from 'react-share-lite'
 import RelatedNews from './RelatedNews'
 import NoData from '../layout/NoData'
 import { fetchArticleBySlug } from '@/lib/axios/action/article'
@@ -10,8 +10,19 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { ResultArtilce, Tag } from '@/types/data'
 import AdsTemplate from '../ads/AdsTemplate'
 import { Suspense } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 const ArtikelDetailPage = ({ slug }: { slug: string }) => {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL
+
+    const url = `${pathname}?${searchParams.toString()}`;
+    const fullURL = (() => {
+        const constructed = new URL(url, typeof window !== "undefined" ? window.location.origin : backendUrl).href;
+        return constructed.endsWith('?') ? constructed.slice(0, -1) : constructed;
+    })();
 
     const { data: article } = useSuspenseQuery<ResultArtilce>({
         queryKey: ['articles', slug],
@@ -43,7 +54,7 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
                             </div>
                             {/* Title */}
                             <div className="px-6 pt-4">
-                                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                                <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                                     {article.title}
                                 </h1>
                                 {/* Meta Info */}
@@ -76,15 +87,13 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
                                         <span>{article.pewarta}</span>
                                     </div>
                                     <div className="flex items-center gap-2 ml-auto">
-                                        <button className="hover:text-sky-600 transition">
-                                            <Facebook className="w-5 h-5" />
-                                        </button>
-                                        <button className="hover:text-sky-600 transition">
-                                            <Twitter className="w-5 h-5" />
-                                        </button>
-                                        <button className="hover:text-sky-600 transition">
-                                            <Share2 className="w-5 h-5" />
-                                        </button>
+                                        <WhatsappShare
+                                            size={24}
+                                            round={true}
+                                            url={fullURL}
+                                        />
+                                        <FacebookShare size={24} round={true} url={fullURL} />
+
                                     </div>
                                 </div>
                             </div>
