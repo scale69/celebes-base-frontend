@@ -70,7 +70,7 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
                                     {article.title}
                                 </h1>
                                 {/* Meta Info */}
-                                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 pb-4 border-b border-gray-200">
+                                <div className="flex lg:flex-wrap flex-wrap-reverse items-center gap-4 text-sm text-gray-600 pb-4 border-b border-gray-200">
                                     <div className="flex items-center gap-2">
                                         <Calendar className="w-4 h-4" />
                                         <span>
