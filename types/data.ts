@@ -90,6 +90,7 @@ export interface Ads {
   name: string;
   placement: string;
   target_url: string;
+  target_category: string;
   start_date: string;
   end_date: string;
   image: string;

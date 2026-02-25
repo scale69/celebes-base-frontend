@@ -117,7 +117,7 @@ export default function RootLayout({
               >
                 <div className="xl:container mx-auto px-4 py-6">
                   {/* <div className="w-full flex gap-6"> */}
-                  <div className="grid justify-center  grid-cols-1 lg:grid-cols-10 gap-6">
+                  <div className="grid justify-center  grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* Left Ad */}
                     <LeftSidebar />
                     {/* Main Content */}

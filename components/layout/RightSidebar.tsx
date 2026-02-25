@@ -21,7 +21,7 @@ export default async function RightSidebar() {
 
     return (
         <aside
-            className="lg:col-span-2 overflow-scroll"
+            className="lg:col-span-3 overflow-scroll"
             aria-label="Right sidebar"
             role="complementary"
         >

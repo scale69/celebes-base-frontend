@@ -6,7 +6,13 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Ads } from "@/types/data";
 
-export default function AdsTemplate({ placement, location }: { placement: "inline" | "header" | "left sidebar" | "right sidebar", location?: string }) {
+
+type AdsProps = {
+    placement: "inline" | "header" | "left sidebar" | "right sidebar",
+    location?: "top" | "bottom"
+}
+
+export default function AdsTemplate({ placement, location }: AdsProps) {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
@@ -18,11 +24,13 @@ export default function AdsTemplate({ placement, location }: { placement: "inlin
         return constructed.endsWith('?') ? constructed.slice(0, -1) : constructed;
     })();
 
-
+    // Mendapatkan pathname pertama dari URL, tanpa leading atau trailing slash kosong
+    // Contoh: "/sultra/kantah-baubau-rampungkan-seluruh-tunggakan-layanan?" => "sultra"
+    const getPatname = pathname?.split('/').filter(Boolean)[0];
 
     const { data, isLoading } = useQuery({
-        queryKey: ["ads", placement, fullURL],
-        queryFn: () => fetchAds(placement, fullURL),
+        queryKey: ["ads", placement, getPatname],
+        queryFn: () => fetchAds(placement, getPatname),
     });
 
     if (isLoading) return null
@@ -30,6 +38,8 @@ export default function AdsTemplate({ placement, location }: { placement: "inlin
     if (!data) return null
 
     if (data.length <= 0) return <AdBanner size={placement} title="Iklan" className="mb-4" />
+
+
     return (
         <div
             className="flex  flex-col gap-4 "
@@ -55,7 +65,7 @@ export default function AdsTemplate({ placement, location }: { placement: "inlin
                     ))
                 ) : (
                     location === "bottom" &&
-                    data.slice(2).map((ads: Ads) => (
+                    data.slice(1).map((ads: Ads) => (
                         <div key={ads?.id} className='bg-gradient-to-br w-full from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden'>
                             <Image
                                 src={`${ads.image}`}
@@ -105,7 +115,7 @@ export default function AdsTemplate({ placement, location }: { placement: "inlin
             {(placement === "header") && (
                 data.slice(0, 1).map((ads: Ads) => (
                     <div
-                        key={ads.id}
+                        key={ads?.id}
                         className={`bg-gradient-to-br w-full h-32 from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden }`}
                     >
                         <Image

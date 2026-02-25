@@ -47,7 +47,6 @@ const Home = () => {
 
             {/* Ad inline Banner */}
             <div className=" gap-4 my-4 ">
-
                 <Suspense fallback={null}>
                     <AdsTemplate placement="inline" />
                 </Suspense>
