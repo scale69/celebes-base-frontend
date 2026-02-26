@@ -89,9 +89,6 @@ export default function NewsHeader() {
                         </>
                     )
                     }
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>{title}</BreadcrumbPage>
-                    </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
 

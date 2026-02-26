@@ -140,21 +140,18 @@ const Header = () => {
                             </Suspense>
                         </div>
 
-                        {/* Mobile Menu Button */}
-                        <button
-                            onClick={() => setIsSidebarOpen(true)}
-                            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition"
-                        >
-                            <Menu className="w-6 h-6 text-gray-700" />
-                        </button>
+
                     </div>
                 </div>
             </div >
 
             {/* Navigation - Desktop */}
             <nav className="hidden lg:block bg-amber-600 text-white" >
+
                 <div className="container mx-auto px-4">
+
                     <div className="flex items-center justify-start">
+
                         {/* Home */}
                         <Link href="/" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
                             <Home />
@@ -281,8 +278,8 @@ const Header = () => {
 
             {/* Mobile Navigation */}
             {/* <nav className="lg:hidden bg-gray-900 text-white"> */}
-            <nav className="lg:hidden bg-amber-600 text-white">
-                <div className="container mx-auto px-4">
+            <nav className=" lg:hidden bg-amber-600 text-white">
+                <div className="flex justify-between mx-auto px-4">
                     <div className="flex items-center space-x-4 py-3 overflow-x-auto">
                         <Link href="/" className={`"text-s font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
                             <Home />
@@ -300,6 +297,13 @@ const Header = () => {
                             Olahraga
                         </Link>
                     </div>
+                    {/* Mobile Menu Button */}
+                    <button
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="lg:hidden"
+                    >
+                        <Menu className="w-6 h-6 hover:text-sky-700 " />
+                    </button>
                 </div>
             </nav>
 

@@ -11,10 +11,8 @@ const AdBanner = ({ size = 'inline', title = 'Iklan', className }: AdBannerProps
         inline: 'w-full h-24 md:h-28',
         leftsidebar: 'w-full h-98',
         rightsidebar: 'w-full h-98',
-        header: 'w-full lg:w-98 h-40 lg:h-32 ',
+        header: 'w-full lg:w-98 h-32 ',
     }
-
-
 
     return (
         <div>

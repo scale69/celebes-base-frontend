@@ -46,7 +46,7 @@ const Home = () => {
             <TopNews />
 
             {/* Ad inline Banner */}
-            <div className="flex flex-col gap-5 pt-4 pb-10">
+            <div className="flex flex-col gap-5  pb-10">
                 <Suspense fallback={null}>
                     <AdsTemplate placement="inline" />
                 </Suspense>
