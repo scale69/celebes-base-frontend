@@ -35,6 +35,10 @@ export const metadata = {
     telephone: false,
   },
   metadataBase: new URL("https://celebessultra.com"),
+  icons: {
+    icon: '/logo.png', // path relative to the public directory or root
+    apple: '/logo.png',
+  },
   openGraph: {
     title: "CELEBES SULTRA - Portal Berita Sulawesi Tenggara",
     description:
@@ -42,6 +46,7 @@ export const metadata = {
     type: "website",
     locale: "id_ID",
     siteName: "CELEBES SULTRA",
+    images: "/logo.png"
   },
   twitter: {
     card: "summary_large_image",
