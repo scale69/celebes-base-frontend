@@ -6,18 +6,12 @@ import Image from 'next/image'
 
 
 const AdBanner = ({ size = 'inline', title = 'Iklan', className }: AdBannerProps) => {
-    // const sizeClasses = {
-    //     horizontal: 'w-full h-24 md:h-28',
-    //     sidebar: 'w-full h-64',
-    //     square: 'w-full aspect-square',
-    //     header: 'w-72 h-32 ',
-    // }
     const replaceSize = size.replace(/\s/g, '').toLowerCase() as string
     const sizeClasses = {
         inline: 'w-full h-24 md:h-28',
-        leftsidebar: 'w-full h-64',
-        rightsidebar: 'w-full h-64',
-        header: 'w-full lg:w-98  h-24 ',
+        leftsidebar: 'w-full h-98',
+        rightsidebar: 'w-full h-98',
+        header: 'w-full lg:w-98 h-40 lg:h-32 ',
     }
 
 
@@ -27,7 +21,6 @@ const AdBanner = ({ size = 'inline', title = 'Iklan', className }: AdBannerProps
             <div className={cn(
                 'bg-gradient-to-br  from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 overflow-hidden',
                 sizeClasses[replaceSize as keyof typeof sizeClasses],
-                className
             )}>
                 <div className="text-center">
                     <p className="text-gray-500 font-semibold text-sm">{title}</p>

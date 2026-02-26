@@ -42,7 +42,7 @@ export default function TopNews() {
         );
     return (
         <div className=''>
-            <section aria-labelledby="featured-news-heading" className="mb-8">
+            <section aria-labelledby="featured-news-heading">
                 <h2
                     id="featured-news-heading"
                     className="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-sky-500 pl-3"

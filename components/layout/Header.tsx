@@ -123,14 +123,13 @@ const Header = () => {
 
             {/* Main Header */}
             <div className="bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="flex items-center justify-between py-4">
+                <div className="container mx-auto ">
+                    <div className="flex items-center py-4 justify-between ">
                         {/* Logo */}
-                        <Link href="/" className="flex-shrink-0">
-                            <div className="flex flex-col">
+                        <Link href="/"  >
+                            <div className="flex flex-col ">
                                 <Image src={'/logo.png'} alt='logo-cs' width={200} height={100} unoptimized />
-
-                                <p className="text-[10px] bg-white ml-[76px] -mt-[26px] text-gray-700 tracking-wide">Portal Berita Sulawesi Tenggara</p>
+                                <span className="text-[10px] bg-white ml-[76px] -mt-[26px] text-gray-700 tracking-wide">Portal Berita Sulawesi Tenggara</span>
                             </div>
                         </Link>
 
@@ -150,10 +149,10 @@ const Header = () => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </div >
 
             {/* Navigation - Desktop */}
-            <nav className="hidden lg:block bg-amber-600 text-white">
+            <nav className="hidden lg:block bg-amber-600 text-white" >
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-start">
                         {/* Home */}
@@ -278,7 +277,7 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-            </nav>
+            </ nav>
 
             {/* Mobile Navigation */}
             {/* <nav className="lg:hidden bg-gray-900 text-white"> */}
@@ -306,7 +305,7 @@ const Header = () => {
 
             {/* Search Modal */}
             {/* <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} /> */}
-        </header>
+        </header >
     )
 }
 

@@ -20,7 +20,7 @@ const Home = () => {
         queryFn: fetchArticles,
     })
 
-    if (isLoading) return <LoadingCard />
+    if (isLoading) return null
     if (!data)
         return (
             <NoData
@@ -41,12 +41,12 @@ const Home = () => {
         );
 
     return (
-        <div className="w-full lg:col-span-6">
+        <div className="w-full  lg:col-span-6">
             {/* Hero Section */}
             <TopNews />
 
             {/* Ad inline Banner */}
-            <div className=" gap-4 my-4 ">
+            <div className="flex flex-col gap-5 pt-4 pb-10">
                 <Suspense fallback={null}>
                     <AdsTemplate placement="inline" />
                 </Suspense>

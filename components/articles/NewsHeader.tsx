@@ -27,6 +27,8 @@ export default function NewsHeader() {
     const slug = segments[segments.length - 1];
     const previou = segments[segments.length - 2];
 
+
+
     const title = slug.split("-").join(" ");
 
 
@@ -64,17 +66,29 @@ export default function NewsHeader() {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                        <BreadcrumbLink className="hover:text-sky-700" href="/">Home</BreadcrumbLink>
                     </BreadcrumbItem>
-                    {previou && (
+                    {previou ? (
                         <>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbLink href={`/${previou}`}>{previou}</BreadcrumbLink>
+                                <BreadcrumbLink className="capitalize hover:text-sky-700" href={`/${previou}`}>{previou}</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem className="capitalize">
+                                {slug}
                             </BreadcrumbItem>
                         </>
-                    )}
-                    <BreadcrumbSeparator />
+                    ) : (
+                        <>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem className="capitalize">
+                                {slug}
+                            </BreadcrumbItem>
+
+                        </>
+                    )
+                    }
                     <BreadcrumbItem>
                         <BreadcrumbPage>{title}</BreadcrumbPage>
                     </BreadcrumbItem>

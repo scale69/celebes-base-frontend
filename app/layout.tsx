@@ -84,30 +84,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "CELEBES SULTRA",
-              "url": "https://celebessultra.com",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://celebessultra.com/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              },
-              "publisher": {
-                "@type": "Organization",
-                "name": "CELEBES SULTRA",
-                "logo": {
-                  "@type": "ImageObject",
-                  "url": "https://celebessultra.com/logo.png"
-                }
-              }
-            })
-          }}
-        />
+
         <ReactQueryProvider>
           <ThemeProvider
             attribute="class"
@@ -116,17 +93,15 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Header />
-            <div className=" flex flex-col bg-gray-50 h-full">
+            <div className=" flex flex-col  bg-gray-50 h-full">
               <main
                 className="flex-1 "
               >
-                <div className="xl:container mx-auto p-6">
-                  {/* <div className="w-full flex gap-6"> */}
+                <div className="xl:container mx-auto px-3 py-6">
                   <div className="grid justify-center  grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* Left Ad */}
                     <LeftSidebar />
                     {/* Main Content */}
-                    {/* <div className="lg:col-span-7"> */}
                     <div className=" lg:col-span-6">
                       {children}
                     </div>
