@@ -5,6 +5,10 @@ import { Metadata } from "next";
 interface PageProps {
     params: Promise<{ slug: string }>
 }
+function stripHtml(html: string) {
+    return html.replace(/<[^>]*>/g, "")
+}
+
 export async function generateMetadata(
     { params }: PageProps
 ): Promise<Metadata> {
@@ -18,12 +22,15 @@ export async function generateMetadata(
         };
     }
 
+    const plainText = stripHtml(article.content)
+    const description = plainText.slice(0, 160)
+
     return {
         title: article.title,
-        description: article.content?.slice(0, 150),
+        description: description,
         openGraph: {
             title: article.title,
-            description: article.content?.slice(0, 150),
+            description: description,
             type: "article",
             images: [
                 {
@@ -36,11 +43,12 @@ export async function generateMetadata(
         twitter: {
             card: "summary_large_image",
             title: article.title,
-            description: article.content?.slice(0, 150),
+            description: description,
             images: String(article.image),
         },
     };
 }
+
 
 export default function Page({ params }: PageProps) {
     return <ArticlePageTemplate params={params} />;
