@@ -120,7 +120,7 @@ export default function RootLayout({
               <main
                 className="flex-1 "
               >
-                <div className="xl:container mx-auto px-4 py-6">
+                <div className="xl:container mx-auto p-6">
                   {/* <div className="w-full flex gap-6"> */}
                   <div className="grid justify-center  grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* Left Ad */}

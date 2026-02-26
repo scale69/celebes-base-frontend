@@ -407,7 +407,7 @@ export default function RedaksiPage() {
           <RedaksiCard
             icon={<User size={18} />}
             label="Editor"
-            value="Sarif"
+            value="Muh. Yasir Putra A."
           />
         </div>
 

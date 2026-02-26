@@ -14,11 +14,9 @@ const NewsCard = ({ news, featured = false }: { news: ResultArtilce, featured?: 
                 : null;
 
 
-
-
     return (
         <Link
-            href={`${news.category.parent?.slug ? `/${news.category.parent.slug}` : ''}/${news.category.slug}/${news.slug}`}
+            href={`${news.category.parent?.slug ? `/${news.category.parent.slug}` : ''}/berita-${news.category.slug}/${news.slug}`}
             aria-label={ariaLabel}
             prefetch={false}
         >

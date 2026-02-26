@@ -52,10 +52,9 @@ const ArtikelDetailPage = ({ slug }: { slug: string }) => {
 
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-50">
-
+        <div className="min-h-screen flex flex-col  bg-gray-50">
             <main className="flex-1">
-                <div className=" mx-auto px-4 py-6">
+                <div className=" mx-auto">
                     <article className=' lg:col-span-7'>
                         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
                             {/* Category Badge */}
