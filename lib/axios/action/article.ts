@@ -109,10 +109,10 @@ export const fetchArticleByRelated = cache(async (slug: string) => {
   }
 });
 
-export const searchArticles = cache(async (query: string) => {
+export const searchArticles = cache(async (title: string) => {
   const instance = axiosInstance();
   try {
-    const res = await instance.get(`/api/articles/?search=${query}`);
+    const res = await instance.get(`/api/articles/?title=${title}`);
     return res.data;
   } catch (error) {
     if (error instanceof Error) {
@@ -123,4 +123,3 @@ export const searchArticles = cache(async (query: string) => {
     return null;
   }
 });
-

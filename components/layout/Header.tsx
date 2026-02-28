@@ -7,6 +7,7 @@ import Image from 'next/image'
 import MobileSidebar from './MobileSidebar'
 import AdsTemplate from '../ads/AdsTemplate'
 import { usePathname } from 'next/navigation'
+import SearchModal from './SearchModal'
 
 
 const Header = () => {
@@ -111,10 +112,13 @@ const Header = () => {
                                 aria-label="Search"
                                 title="Search (Ctrl+K)"
                             >
-                                <Search className="w-4 h-4 cursor-pointer" />
-                                <span className="hidden md:inline text-xs opacity-0 group-hover:opacity-100 transition">
+                                <span className="hidden md:inline text-xs  group-hover:opacity-100 transition">
                                     Ctrl+K
                                 </span>
+                                <Search className="w-4 h-4 cursor-pointer" />
+                                {/* <span className="hidden md:inline text-xs opacity-0 group-hover:opacity-100 transition">
+                                    Ctrl+K
+                                </span> */}
                             </button>
                         </div>
                     </div>
@@ -308,7 +312,7 @@ const Header = () => {
             </nav>
 
             {/* Search Modal */}
-            {/* <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} /> */}
+            <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         </header >
     )
 }

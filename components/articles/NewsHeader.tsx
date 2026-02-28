@@ -109,6 +109,10 @@ export default function NewsHeader() {
                 ) : (
                     <NoData />
                 )}
+                {/* {data.results.length > 5 && (
+
+                    <p>load more..</p>
+                )} */}
             </div>
         </div>
 
