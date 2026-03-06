@@ -189,7 +189,17 @@
   
     /* Hover animations for news cards */
     .news-card-hover {
-      @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+      @apply transition-all duration-300;
+      /* Hover hanya untuk desktop */
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          @apply shadow-xl -translate-y-1;
+        }
+      }
+      /* Feedback touch untuk mobile */
+      &:active {
+        @apply scale-95 opacity-90;
+      }
     }
   
     /* Fade in animation */
