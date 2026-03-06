@@ -1,320 +1,304 @@
-'use client'
+"use client";
 
-import { useState, useEffect, Suspense } from 'react'
-import Link from 'next/link'
-import { Menu, Search, ChevronDown, Home } from 'lucide-react'
-import Image from 'next/image'
-import MobileSidebar from './MobileSidebar'
-import AdsTemplate from '../ads/AdsTemplate'
-import { usePathname } from 'next/navigation'
-import SearchModal from './SearchModal'
+import { useState, useEffect, useRef, Suspense, useCallback } from "react";
+import Link from "next/link";
+import { Menu, Search, ChevronDown, Home } from "lucide-react";
+import Image from "next/image";
+import MobileSidebar from "./MobileSidebar";
+import AdsTemplate from "../ads/AdsTemplate";
+import { usePathname } from "next/navigation";
+import SearchModal from "./SearchModal";
 
+// ─────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────
+interface SubItem {
+    label: string;
+    href: string;
+}
 
-const Header = () => {
-    const pathname = usePathname()
+interface DropdownProps {
+    label: string;
+    isActive: boolean;
+    alignRight?: boolean;
+    children: React.ReactNode;
+}
 
-    const [isScrolled, setIsScrolled] = useState(false)
-    const [isSearchOpen, setIsSearchOpen] = useState(false)
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+// ─────────────────────────────────────────────
+// Dropdown Component (self-contained, own ref)
+// ─────────────────────────────────────────────
+function Dropdown({ label, isActive, alignRight = false, children }: DropdownProps) {
+    const [open, setOpen] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
 
-
-
-
+    // Close when clicking outside this dropdown
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10)
-        }
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
-
-    // Global keyboard shortcut for search (Ctrl+K / Cmd+K)
-    useEffect(() => {
-        const handleKeyboard = (e: KeyboardEvent) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault()
-                setIsSearchOpen(true)
+        const handler = (e: MouseEvent | TouchEvent) => {
+            if (ref.current && !ref.current.contains(e.target as Node)) {
+                setOpen(false);
             }
-        }
-        document.addEventListener('keydown', handleKeyboard)
-        return () => document.removeEventListener('keydown', handleKeyboard)
-    }, [])
-
-    const sultraSubmenu = [
-        { label: 'Show All', href: '/sultra' },
-        {
-            label: 'Daratan', subItems: [
-                { label: 'Kendari', href: '/sultra/kendari' },
-                { label: 'Konawe', href: '/sultra/konawe' },
-                { label: 'Kolaka', href: '/sultra/kolaka' },
-            ]
-        },
-        {
-            label: 'Kepulauan', subItems: [
-                { label: 'Muna & Muna Barat', href: '/sultra/muna-dan-muna-barat' },
-                { label: 'Baubau', href: '/sultra/baubau' },
-                { label: 'Kepulauan Buton', href: '/sultra/kepulauan-buton' },
-            ]
-        },
-    ]
-
-    const hukumPolitikSubmenu = [
-        { label: 'Hukum', href: '/hukum-dan-politik/hukum' },
-        { label: 'Politik', href: '/hukum-dan-politik/politik' },
-    ]
-
-    // date
-    const hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-    const bulan = [
-        "Januari",
-        "Februari",
-        "Maret",
-        "April",
-        "Mei",
-        "Juni",
-        "Juli",
-        "Agustus",
-        "September",
-        "Oktober",
-        "November",
-        "Desember",
-    ];
-    const now = new Date();
-    const dayName = hari[now.getDay()];
-    const day = now.getDate();
-    const month = bulan[now.getMonth()];
-    const year = now.getFullYear();
-
+        };
+        document.addEventListener("mousedown", handler);
+        document.addEventListener("touchstart", handler);
+        return () => {
+            document.removeEventListener("mousedown", handler);
+            document.removeEventListener("touchstart", handler);
+        };
+    }, []);
 
     return (
-        <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white border-b border-gray-200'
-            }`}>
-            <MobileSidebar
-                isOpen={isSidebarOpen}
-                onClose={() => setIsSidebarOpen(false)}
-            />
-            {/* Top Bar with Ad */}
+        <div ref={ref} className="relative">
+            <button
+                type="button"
+                onClick={() => setOpen((v) => !v)}
+                className={`px-4 py-3 hover:bg-sky-600 transition-colors text-sm font-medium flex items-center gap-1 ${isActive ? "border-b-2 border-white" : ""
+                    }`}
+            >
+                {label}
+                <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+                />
+            </button>
+
+            {open && (
+                <div
+                    className={`absolute top-full mt-0 bg-white text-gray-900 shadow-xl z-50 ${alignRight ? "right-0" : "left-0"
+                        }`}
+                    // Prevent closing when clicking inside dropdown
+                    onMouseDown={(e) => e.stopPropagation()}
+                >
+                    {children}
+                </div>
+            )}
+        </div>
+    );
+}
+
+// ─────────────────────────────────────────────
+// Data
+// ─────────────────────────────────────────────
+const SULTRA_DARATAN: SubItem[] = [
+    { label: "Kendari", href: "/sultra/kendari" },
+    { label: "Konawe", href: "/sultra/konawe" },
+    { label: "Kolaka", href: "/sultra/kolaka" },
+];
+
+const SULTRA_KEPULAUAN: SubItem[] = [
+    { label: "Muna & Muna Barat", href: "/sultra/muna-dan-muna-barat" },
+    { label: "Baubau", href: "/sultra/baubau" },
+    { label: "Kepulauan Buton", href: "/sultra/kepulauan-buton" },
+];
+
+const HUKUM_POLITIK: SubItem[] = [
+    { label: "Hukum", href: "/hukum-dan-politik/hukum" },
+    { label: "Politik", href: "/hukum-dan-politik/politik" },
+];
+
+const NAV_LINKS = [
+    { label: "Ekonomi", href: "/ekonomi" },
+    { label: "Olahraga", href: "/olahraga" },
+    { label: "Nasional", href: "/nasional" },
+    { label: "Internasional", href: "/internasional" },
+    { label: "Hiburan & Life Style", href: "/hiburan-dan-life-style" },
+    { label: "Artikel & ADV", href: "/artikel-dan-adv" },
+];
+
+const MOBILE_LINKS = [
+    { label: "Sultra", href: "/sultra" },
+    { label: "Ekonomi", href: "/ekonomi" },
+    { label: "Nasional", href: "/nasional" },
+    { label: "Olahraga", href: "/olahraga" },
+];
+
+const HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+// ─────────────────────────────────────────────
+// Header
+// ─────────────────────────────────────────────
+export default function Header() {
+    const pathname = usePathname();
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => setIsScrolled(window.scrollY > 10);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+                e.preventDefault();
+                setIsSearchOpen(true);
+            }
+        };
+        document.addEventListener("keydown", onKey);
+        return () => document.removeEventListener("keydown", onKey);
+    }, []);
+
+    const now = new Date();
+    const dateStr = `${HARI[now.getDay()]}, ${now.getDate()} ${BULAN[now.getMonth()]} ${now.getFullYear()}`;
+
+    const navLinkClass = (href: string) =>
+        `px-4 py-3 hover:bg-sky-600 transition-colors text-sm font-medium inline-block ${pathname === href ? "border-b-2 border-white" : ""
+        }`;
+
+    return (
+        <header
+            className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md" : "bg-white border-b border-gray-200"
+                }`}
+        >
+            <MobileSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+            {/* ── Top Bar ── */}
             <div className="bg-gradient-to-r from-sky-600 to-sky-500 text-white">
                 <div className="container mx-auto px-4">
-                    <div className="flex items-center justify-between h-10">
-                        <div className="flex items-center space-x-4 text-sm">
-                            <span>
-                                {dayName}, {day} {month} {year}
-                            </span>
+                    <div className="flex items-center justify-between h-10 text-sm">
+                        <div className="flex items-center gap-4">
+                            <span>{dateStr}</span>
                             <span className="hidden md:inline">|</span>
                             <span className="hidden md:inline">Kendari, Sulawesi Tenggara</span>
                         </div>
-                        {/* search */}
-                        <div className="flex items-center space-x-4">
-                            <button
-                                onClick={() => setIsSearchOpen(true)}
-                                className="flex items-center gap-2 hover:text-sky-200 transition group"
-                                aria-label="Search"
-                                title="Search (Ctrl+K)"
-                            >
-                                <span className="hidden md:inline text-xs  group-hover:opacity-100 transition">
-                                    Ctrl+K
+                        <button
+                            onClick={() => setIsSearchOpen(true)}
+                            className="flex items-center gap-2 hover:text-sky-200 transition group"
+                            aria-label="Cari berita (Ctrl+K)"
+                        >
+                            <span className="hidden md:inline text-xs">Ctrl+K</span>
+                            <Search className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* ── Logo & Ad ── */}
+            <div className="bg-white">
+                <div className="container mx-auto">
+                    <div className="flex items-center py-4 justify-between">
+                        <Link href="/">
+                            <div className="flex flex-col">
+                                <Image src="/logo.png" alt="Logo" width={200} height={100} unoptimized />
+                                <span className="text-[10px] ml-[76px] -mt-[26px] text-gray-700 tracking-wide">
+                                    Portal Berita Sulawesi Tenggara
                                 </span>
-                                <Search className="w-4 h-4 cursor-pointer" />
-                                {/* <span className="hidden md:inline text-xs opacity-0 group-hover:opacity-100 transition">
-                                    Ctrl+K
-                                </span> */}
-                            </button>
+                            </div>
+                        </Link>
+                        <div className="hidden lg:block">
+                            <Suspense fallback={null}>
+                                <AdsTemplate placement="header" />
+                            </Suspense>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Main Header */}
-            <div className="bg-white">
-                <div className="container mx-auto ">
-                    <div className="flex items-center py-4 justify-between ">
-                        {/* Logo */}
-                        <Link href="/"  >
-                            <div className="flex flex-col ">
-                                <Image src={'/logo.png'} alt='logo-cs' width={200} height={100} unoptimized />
-                                <span className="text-[10px] bg-white ml-[76px] -mt-[26px] text-gray-700 tracking-wide">Portal Berita Sulawesi Tenggara</span>
-                            </div>
-                        </Link>
-
-                        {/* Header Ad - Desktop Only */}
-                        <div className="hidden lg:block">
-                            <Suspense fallback={null}>
-                                <AdsTemplate placement='header' />
-                            </Suspense>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div >
-
-            {/* Navigation - Desktop */}
-            <nav className="hidden lg:block bg-amber-600 text-white" >
-
+            {/* ── Desktop Nav ── */}
+            <nav className="hidden lg:block bg-amber-600 text-white">
                 <div className="container mx-auto px-4">
+                    <div className="flex items-center">
 
-                    <div className="flex items-center justify-start">
-
-                        {/* Home */}
-                        <Link href="/" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                            <Home />
+                        <Link href="/" className={navLinkClass("/")}>
+                            <Home className="w-4 h-4" />
                         </Link>
 
-                        {/* SULTRA Dropdown */}
-                        <div className="relative group">
-                            <button className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium flex items-center gap-1 ${pathname.includes("sultra") ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                                SULTRA
-                                <ChevronDown className="w-4 h-4" />
-                            </button>
-                            <div className="absolute left-0 top-full mt-0 w-[420px] bg-white text-gray-900 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                <div className="p-4">
-                                    <Link href="/sultra" className="block px-3 py-2 hover:bg-gray-100 rounded font-semibold text-sky-600 mb-2">
-                                        Show All
-                                    </Link>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <p className="px-3 py-1 text-xs font-bold text-gray-500 uppercase">Daratan</p>
-                                            {sultraSubmenu[1]?.subItems?.map((item) => (
-                                                <Link
-                                                    key={item.href}
-                                                    href={item.href}
-                                                    className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition"
-                                                >
-                                                    {item.label}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                        <div>
-                                            <p className="px-3 py-1 text-xs font-bold text-gray-500 uppercase">Kepulauan</p>
-                                            {sultraSubmenu[2]?.subItems?.map((item) => (
-                                                <Link
-                                                    key={item.href}
-                                                    href={item.href}
-                                                    className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition"
-                                                >
-                                                    {item.label}
-                                                </Link>
-                                            ))}
-                                        </div>
+                        {/* SULTRA dropdown */}
+                        <Dropdown label="SULTRA" isActive={pathname.includes("sultra")}>
+                            <div className="p-4 w-[420px]">
+                                <Link href="/sultra" className="block px-3 py-2 hover:bg-gray-100 rounded font-semibold text-sky-600 mb-2">
+                                    Show All
+                                </Link>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p className="px-3 py-1 text-xs font-bold text-gray-500 uppercase">Daratan</p>
+                                        {SULTRA_DARATAN.map((item) => (
+                                            <Link key={item.href} href={item.href} className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition-colors">
+                                                {item.label}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                    <div>
+                                        <p className="px-3 py-1 text-xs font-bold text-gray-500 uppercase">Kepulauan</p>
+                                        {SULTRA_KEPULAUAN.map((item) => (
+                                            <Link key={item.href} href={item.href} className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition-colors">
+                                                {item.label}
+                                            </Link>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Dropdown>
 
-                        {/* Ekonomi */}
-                        <Link href="/ekonomi" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/ekonomi' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                            Ekonomi
-                        </Link>
+                        <Link href="/ekonomi" className={navLinkClass("/ekonomi")}>Ekonomi</Link>
 
-                        {/* Hukum & Politik Dropdown */}
-                        <div className="relative group">
-                            <button className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium flex items-center gap-1 ${pathname.includes("hukum-dan-politik") ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                                Hukum & Politik
-                                <ChevronDown className="w-4 h-4" />
-                            </button>
-                            <div className="absolute left-0 top-full mt-0 w-[200px] bg-white text-gray-900 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                <Link href="/hukum-dan-politik" className="block px-3 py-3 hover:bg-gray-100 rounded font-semibold text-sky-600">
+                        {/* Hukum & Politik dropdown */}
+                        <Dropdown label="Hukum & Politik" isActive={pathname.includes("hukum-dan-politik")}>
+                            <div className="w-[200px] py-2">
+                                <Link href="/hukum-dan-politik" className="block px-4 py-2 hover:bg-gray-100 font-semibold text-sky-600 text-sm">
                                     Show All
                                 </Link>
-                                <div className="p-2">
-                                    {hukumPolitikSubmenu.map((item) => (
-                                        <Link
-                                            key={item.href}
-                                            href={item.href}
-                                            className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition"
-                                        >
+                                {HUKUM_POLITIK.map((item) => (
+                                    <Link key={item.href} href={item.href} className="block px-4 py-2 hover:bg-gray-100 text-sm transition-colors">
+                                        {item.label}
+                                    </Link>
+                                ))}
+                            </div>
+                        </Dropdown>
+
+                        {NAV_LINKS.slice(1).map((link) => (
+                            <Link key={link.href} href={link.href} className={navLinkClass(link.href)}>
+                                {link.label}
+                            </Link>
+                        ))}
+
+                        {/* Tentang Kami — right aligned */}
+                        <div className="ml-auto">
+                            <Dropdown label="Tentang Kami" isActive={pathname.includes("tentang-kami")} alignRight>
+                                <div className="w-[200px] py-2">
+                                    {[
+                                        { label: "Tentang Kami", href: "/tentang-kami" },
+                                        { label: "Redaksi", href: "/redaksi" },
+                                        { label: "Kontak", href: "/tentang-kami/#kontak" },
+                                    ].map((item) => (
+                                        <Link key={item.href} href={item.href} className="block px-4 py-2 hover:bg-gray-100 text-sm transition-colors">
                                             {item.label}
                                         </Link>
                                     ))}
                                 </div>
-                            </div>
+                            </Dropdown>
                         </div>
 
-                        {/* Olahraga */}
-                        <Link href="/olahraga" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/olahraga' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                            Olahraga
-                        </Link>
-
-                        {/* Nasional */}
-                        <Link href="/nasional" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/nasional' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                            Nasional
-                        </Link>
-                        {/* Internasional */}
-                        <Link href="/internasional" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/internasional' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                            Internasional
-                        </Link>
-
-                        {/* Hiburan & Life Style */}
-                        <Link href="/hiburan-dan-life-style" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/hiburan-dan-life-style' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                            Hiburan & Life Style
-                        </Link>
-
-                        {/* Artikel & ADV */}
-                        <Link href="/artikel-dan-adv" className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium inline-block ${pathname === '/artikel-dan-adv' ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                            Artikel & ADV
-                        </Link>
-
-                        {/* Tentang Kami - Right aligned dropdown */}
-                        <div className="relative group ml-auto">
-                            <button className={`px-4 py-3 hover:bg-sky-600 transition text-sm font-medium flex items-center gap-1 ${pathname.includes("tentang-kami") ? "border-b-2  border-sky-600 hover:text-white" : ""}`}>
-                                Tentang Kami
-                                <ChevronDown className="w-4 h-4" />
-                            </button>
-                            <div className="absolute right-0 top-full mt-0 w-[200px] bg-white text-gray-900 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                <div className="p-2">
-                                    <Link href="/tentang-kami" className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition">
-                                        Tentang Kami
-                                    </Link>
-                                    <Link href="/redaksi" className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition">
-                                        Redaksi
-                                    </Link>
-
-                                    <Link href="/tentang-kami/#kontak" className="block px-3 py-2 hover:bg-gray-100 rounded text-sm transition">
-                                        Kontak
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </ nav>
+            </nav>
 
-            {/* Mobile Navigation */}
-            {/* <nav className="lg:hidden bg-gray-900 text-white"> */}
-            <nav className=" lg:hidden bg-amber-600 text-white">
-                <div className="flex justify-between mx-auto px-4">
-                    <div className="flex items-center space-x-4 py-3 overflow-x-auto">
-                        <Link href="/" className={`"text-s font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
-                            <Home />
+            {/* ── Mobile Nav ── */}
+            <nav className="lg:hidden bg-amber-600 text-white">
+                <div className="flex items-center justify-between px-4">
+                    <div className="flex items-center gap-4 py-3 overflow-x-auto">
+                        <Link href="/" className={`text-sm font-medium whitespace-nowrap hover:text-sky-200 transition ${pathname === "/" ? "border-b-2 border-white py-1" : ""}`}>
+                            <Home className="w-4 h-4" />
                         </Link>
-                        <Link href="/sultra" className={`text-sm font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/sultra' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
-                            Sultra
-                        </Link>
-                        <Link href="/ekonomi" className={`text-sm font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/ekonomi' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
-                            Ekonomi
-                        </Link>
-                        <Link href="/nasional" className={`text-sm font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/nasional' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
-                            Nasional
-                        </Link>
-                        <Link href="/olahraga" className={`text-sm font-medium whitespace-nowrap hover:text-sky-400 transition ${pathname === '/olahraga' ? "border-b-2 py-1 border-sky-600 hover:text-white" : ""}`}>
-                            Olahraga
-                        </Link>
+                        {MOBILE_LINKS.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={`text-sm font-medium whitespace-nowrap hover:text-sky-200 transition ${pathname.startsWith(link.href) ? "border-b-2 border-white py-1" : ""
+                                    }`}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
                     </div>
-                    {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => setIsSidebarOpen(true)}
-                        className="lg:hidden"
-                    >
-                        <Menu className="w-6 h-6 hover:text-sky-700 " />
+                    <button onClick={() => setIsSidebarOpen(true)} aria-label="Buka menu">
+                        <Menu className="w-6 h-6" />
                     </button>
                 </div>
             </nav>
 
-            {/* Search Modal */}
             <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-        </header >
-    )
+        </header>
+    );
 }
-
-export default Header

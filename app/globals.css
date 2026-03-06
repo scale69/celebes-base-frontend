@@ -192,11 +192,11 @@
       @apply transition-all duration-300;
     }
     
-    @media (hover: hover) and (pointer: fine) {
+    /* @media (hover: hover) and (pointer: fine) {
       .news-card-hover:hover {
         @apply shadow-xl -translate-y-1;
       }
-    }
+    } */
   
     /* Fade in animation */
     @keyframes fadeIn {
